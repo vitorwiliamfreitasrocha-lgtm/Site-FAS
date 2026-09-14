@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Política de Privacidade e Termos de Uso | Flying Apollo Studios</title>
+  <meta name="description" content="Política de Privacidade e Termos de Uso dos jogos da Flying Apollo Studios. Privacy Policy and Terms of Use for Flying Apollo Studios games.">
+  <meta name="robots" content="index, follow">
+  <script>
+    // Define o idioma antes de renderizar (evita "piscar" o idioma errado)
+    (function () {
+      var lang;
+      try {
+        var p = new URLSearchParams(window.location.search).get('lang');
+        if (p === 'pt' || p === 'en') lang = p;
+        if (!lang) lang = localStorage.getItem('fas-lang');
+      } catch (e) {}
+      if (lang !== 'pt' && lang !== 'en') {
+        lang = (navigator.language || 'en').toLowerCase().indexOf('pt') === 0 ? 'pt' : 'en';
+      }
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+    })();
+  </script>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --surface: #ffffff;
+      --text: #1d2233;
+      --muted: #5b6275;
+      --border: #e2e5ee;
+      --accent: #ff7a2f;
+      --accent-2: #2b3a8f;
+      --header-bg: #10163a;
+      --header-text: #ffffff;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0c1025;
+        --surface: #151a36;
+        --text: #e6e8f2;
+        --muted: #a2a8bf;
+        --border: #262d52;
+        --accent: #ff8c4a;
+        --accent-2: #9fb0ff;
+        --header-bg: #070a1c;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* Idioma: mostra só o bloco do idioma ativo */
+    html[lang="en"] [data-lang="pt"],
+    html:not([lang="en"]) [data-lang="en"] { display: none !important; }
+
+    header {
+      background: var(--header-bg);
+      color: var(--header-text);
+      padding: 18px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 12px rgba(0,0,0,.25);
+    }
+    .header-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      font-weight: 800;
+      letter-spacing: .5px;
+      font-size: 1.1rem;
+      color: var(--header-text);
+      text-decoration: none;
+    }
+    .brand span { color: var(--accent); }
+    .lang-switch {
+      display: inline-flex;
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .lang-switch a {
+      color: var(--header-text);
+      text-decoration: none;
+      padding: 4px 14px;
+      font-size: .85rem;
+      font-weight: 600;
+    }
+    html:not([lang="en"]) .lang-switch a[data-set="pt"],
+    html[lang="en"] .lang-switch a[data-set="en"] {
+      background: var(--accent);
+      color: #10163a;
+    }
+
+    .hero {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 20px 8px;
+    }
+    .hero h1 {
+      font-size: clamp(1.6rem, 4vw, 2.3rem);
+      line-height: 1.25;
+      margin: 0 0 8px;
+    }
+    .updated { color: var(--muted); margin: 0; font-size: .95rem; }
+
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 16px 20px 60px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px clamp(18px, 4vw, 36px);
+      margin: 20px 0;
+    }
+    .summary {
+      border-left: 4px solid var(--accent);
+    }
+    .summary ul { margin: 8px 0 0; padding-left: 20px; }
+    .summary li { margin: 4px 0; }
+
+    nav.toc ol { margin: 8px 0 0; padding-left: 22px; columns: 2; column-gap: 32px; }
+    nav.toc li { break-inside: avoid; margin: 2px 0; }
+    @media (max-width: 640px) { nav.toc ol { columns: 1; } }
+
+    h2 {
+      font-size: 1.5rem;
+      margin: 0 0 4px;
+      color: var(--accent-2);
+    }
+    h3 {
+      font-size: 1.1rem;
+      margin: 28px 0 6px;
+      scroll-margin-top: 90px;
+    }
+    h2[id] { scroll-margin-top: 90px; }
+    p, li { color: var(--text); }
+    a { color: var(--accent-2); }
+    ul { padding-left: 22px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .93rem;
+      margin: 10px 0;
+    }
+    .table-wrap { overflow-x: auto; }
+    th, td {
+      text-align: left;
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    th { color: var(--muted); font-weight: 600; }
+    .note {
+      background: color-mix(in srgb, var(--accent) 10%, transparent);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin: 12px 0;
+    }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: .85rem;
+      padding: 0 20px 40px;
+    }
+  </style>
+</head>
+<body>
+
+<header id="top">
+  <div class="header-inner">
+    <a class="brand" href="#top">FLYING <span>APOLLO</span> STUDIOS</a>
+    <div class="lang-switch" role="group" aria-label="Idioma / Language">
+      <a href="?lang=pt" data-set="pt" hreflang="pt-BR">PT</a>
+      <a href="?lang=en" data-set="en" hreflang="en">EN</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================= -->
+<!-- ========================= PORTUGUÊS ========================= -->
+<!-- ============================================================= -->
+<div data-lang="pt">
+  <section class="hero">
+    <h1>Política de Privacidade e Termos de Uso</h1>
+    <p class="updated">Última atualização: 14 de setembro de 2026</p>
+  </section>
+
+  <main>
+    <div class="card summary">
+      <strong>Resumo</strong>
+      <ul>
+        <li><strong>Nós não coletamos, armazenamos nem vendemos seus dados pessoais.</strong> Nossos jogos não exigem cadastro, login ou conta.</li>
+        <li>Alguns jogos exibem <strong>anúncios</strong> fornecidos por parceiros terceirizados, que podem coletar dados do dispositivo conforme as políticas deles.</li>
+        <li>Alguns jogos oferecem <strong>compras no aplicativo</strong>, processadas exclusivamente pela Apple App Store ou Google Play. Nunca temos acesso aos seus dados de pagamento.</li>
+        <li>Nossos jogos não contêm nudez ou conteúdo sexual explícito.</li>
+      </ul>
+    </div>
+
+    <nav class="card toc" aria-label="Sumário">
+      <strong>Sumário</strong>
+      <ol>
+        <li><a href="#pt-privacidade">Política de Privacidade</a></li>
+        <li><a href="#pt-termos">Termos de Uso</a></li>
+      </ol>
+    </nav>
+
+    <!-- ===================== POLÍTICA DE PRIVACIDADE ===================== -->
+    <section class="card">
+      <h2 id="pt-privacidade">Política de Privacidade</h2>
+
+      <h3 id="pt-p1">1. Quem somos e a quem esta política se aplica</h3>
+      <p>Esta Política de Privacidade descreve como a <strong>Flying Apollo Studios</strong> ("nós", "nosso" ou "Estúdio") trata as informações relacionadas aos jogos e aplicativos que publicamos na Apple App Store, no Google Play e em outras plataformas (coletivamente, os "Jogos").</p>
+      <p>Esta política se aplica a <strong>todos os Jogos</strong> publicados pela Flying Apollo Studios, salvo se um Jogo específico apresentar uma política própria e complementar.</p>
+
+      <h3 id="pt-p2">2. Informações que coletamos</h3>
+      <p><strong>A Flying Apollo Studios não coleta, armazena, compartilha ou vende dados pessoais dos usuários.</strong> Nossos Jogos:</p>
+      <ul>
+        <li>não exigem criação de conta, cadastro ou login;</li>
+        <li>não pedem nome, e-mail, telefone, endereço, fotos, contatos ou qualquer outra informação pessoal;</li>
+        <li>não enviam dados pessoais para servidores próprios do Estúdio.</li>
+      </ul>
+      <p>O progresso do jogo, pontuações e configurações podem ser salvos <strong>apenas localmente no seu dispositivo</strong>. Essas informações não são enviadas para nós e são apagadas quando você desinstala o Jogo (a menos que você utilize o backup do seu próprio sistema operacional ou serviços da plataforma, como Game Center ou Google Play Games, que são regidos pelas políticas da Apple e do Google).</p>
+
+      <h3 id="pt-p3">3. Publicidade de terceiros</h3>
+      <p>Alguns de nossos Jogos são gratuitos e exibem anúncios para manter o desenvolvimento. Os anúncios são fornecidos por redes de publicidade terceirizadas que, <strong>de forma independente de nós</strong>, podem coletar e processar informações do seu dispositivo para exibir anúncios, medir seu desempenho e prevenir fraudes. Essas informações podem incluir:</p>
+      <ul>
+        <li>identificador de publicidade do dispositivo (Google Advertising ID no Android ou IDFA no iOS, quando autorizado);</li>
+        <li>endereço IP e localização aproximada (país/cidade, derivada do IP);</li>
+        <li>modelo do dispositivo, sistema operacional, idioma e operadora;</li>
+        <li>dados de interação com anúncios (visualizações e cliques);</li>
+        <li>dados de diagnóstico e desempenho do SDK de anúncios.</li>
+      </ul>
+      <p>Dependendo do Jogo, os parceiros de publicidade podem incluir:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Parceiro</th><th>Política de privacidade</th></tr></thead>
+          <tbody>
+            <tr><td>Google AdMob</td><td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></td></tr>
+            <tr><td>Unity Ads / Unity LevelPlay</td><td><a href="https://unity.com/legal/game-player-and-app-user-privacy-policy" target="_blank" rel="noopener">unity.com/legal/privacy</a></td></tr>
+            <tr><td>AppLovin</td><td><a href="https://www.applovin.com/privacy/" target="_blank" rel="noopener">applovin.com/privacy</a></td></tr>
+            <tr><td>Meta Audience Network</td><td><a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">facebook.com/privacy/policy</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>A Flying Apollo Studios não recebe dados pessoais identificáveis dessas redes; recebemos apenas relatórios agregados e anônimos (por exemplo, número total de anúncios exibidos e receita).</p>
+
+      <h3 id="pt-p4">4. Anúncios personalizados e seu consentimento</h3>
+      <ul>
+        <li><strong>iOS (App Tracking Transparency):</strong> no iPhone e iPad, só acessamos o identificador de publicidade (IDFA) se você permitir na solicitação exibida pelo sistema. Você pode alterar isso a qualquer momento em <em>Ajustes &gt; Privacidade e Segurança &gt; Rastreamento</em>.</li>
+        <li><strong>Android:</strong> você pode redefinir ou excluir seu ID de publicidade em <em>Configurações &gt; Google &gt; Anúncios</em> (ou <em>Configurações &gt; Privacidade &gt; Anúncios</em>, dependendo do aparelho).</li>
+        <li><strong>Espaço Econômico Europeu, Reino Unido, Suíça e outras regiões:</strong> quando exigido por lei, exibimos um formulário de consentimento antes de mostrar anúncios personalizados. Se você recusar, poderão ser exibidos apenas anúncios não personalizados.</li>
+      </ul>
+      <p>Recusar o rastreamento não impede o uso do Jogo; apenas faz com que os anúncios sejam menos relevantes para você.</p>
+
+      <h3 id="pt-p5">5. Compras no aplicativo</h3>
+      <p>Alguns Jogos oferecem compras opcionais dentro do aplicativo (por exemplo, remoção de anúncios, moedas virtuais, itens ou conteúdo adicional). Todas as transações são <strong>processadas exclusivamente pela Apple App Store ou pelo Google Play</strong>.</p>
+      <ul>
+        <li>Nós <strong>não coletamos nem temos acesso</strong> a dados de cartão de crédito, conta bancária ou outras informações de pagamento.</li>
+        <li>Recebemos apenas a confirmação da loja de que a compra foi concluída (um recibo técnico, sem seus dados pessoais), para liberar o item comprado.</li>
+        <li>O tratamento dos seus dados de pagamento é regido pela <a href="https://www.apple.com/br/legal/privacy/" target="_blank" rel="noopener">Política de Privacidade da Apple</a> ou pela <a href="https://policies.google.com/privacy?hl=pt-BR" target="_blank" rel="noopener">Política de Privacidade do Google</a>.</li>
+      </ul>
+
+      <h3 id="pt-p6">6. Motor do jogo, diagnósticos e serviços das plataformas</h3>
+      <p>Nossos Jogos podem ser desenvolvidos com motores e ferramentas de terceiros (como Unity) que podem coletar dados técnicos anônimos, como informações de falhas (crashes) e desempenho, para garantir o funcionamento correto. As lojas (Apple e Google) também podem nos fornecer estatísticas <strong>agregadas e anônimas</strong> de instalação e uso. Esses dados não nos permitem identificar você.</p>
+
+      <h3 id="pt-p7">7. Permissões do dispositivo</h3>
+      <p>Nossos Jogos solicitam apenas as permissões necessárias ao seu funcionamento, normalmente acesso à internet (para exibir anúncios e processar compras). Não acessamos câmera, microfone, contatos, fotos ou localização precisa, salvo se um recurso específico do Jogo exigir e você autorizar expressamente.</p>
+
+      <h3 id="pt-p8">8. Privacidade de crianças</h3>
+      <p>Não coletamos intencionalmente dados pessoais de crianças menores de 13 anos (ou da idade mínima definida pela legislação do seu país, como a LGPD no Brasil, a COPPA nos EUA e o GDPR na União Europeia).</p>
+      <p>Quando um Jogo é direcionado a crianças ou participa de programas como a categoria <em>Kids</em> da App Store ou o programa <em>Famílias</em> do Google Play:</p>
+      <ul>
+        <li>utilizamos apenas redes de anúncios certificadas/autorizadas para esse público;</li>
+        <li>exibimos apenas anúncios <strong>não personalizados</strong> e adequados à idade, com as configurações de "conteúdo direcionado a crianças" ativadas;</li>
+        <li>não solicitamos o identificador de publicidade para rastreamento;</li>
+        <li>compras e links externos podem ser protegidos por uma verificação para responsáveis (<em>parental gate</em>).</li>
+      </ul>
+      <p>Recomendamos que pais e responsáveis supervisionem o uso dos Jogos e utilizem os controles parentais do dispositivo (Tempo de Uso no iOS ou Family Link no Android) para gerenciar compras. Se você acredita que uma criança nos forneceu dados pessoais, entre em contato e tomaremos as providências.</p>
+
+      <h3 id="pt-p9">9. Segurança</h3>
+      <p>Como não coletamos nem armazenamos dados pessoais em nossos servidores, o risco de exposição dessas informações por nossa parte é mínimo. Ainda assim, selecionamos parceiros confiáveis e reconhecidos no mercado, que adotam medidas de segurança adequadas.</p>
+
+      <h3 id="pt-p10">10. Seus direitos (LGPD, GDPR, CCPA e outras leis)</h3>
+      <p>Dependendo do seu país, você pode ter direito a acessar, corrigir, excluir, portar ou se opor ao tratamento de seus dados pessoais, além de retirar seu consentimento. Como a Flying Apollo Studios <strong>não mantém dados pessoais sobre você</strong>, normalmente não teremos informações para fornecer ou excluir. Para dados tratados por terceiros:</p>
+      <ul>
+        <li>ajuste as permissões de rastreamento e anúncios no seu dispositivo (veja a seção 4);</li>
+        <li>entre em contato diretamente com as redes de publicidade, pelos links da seção 3;</li>
+        <li>para dados de compras, entre em contato com a Apple ou o Google.</li>
+      </ul>
+      <p>Não vendemos dados pessoais, conforme definido pela CCPA/CPRA (Califórnia).</p>
+
+      <h3 id="pt-p11">11. Exclusão de dados</h3>
+      <p>Para apagar todos os dados do Jogo armazenados no seu dispositivo, basta <strong>desinstalar o Jogo</strong>. Para limitar os dados usados por redes de anúncios, redefina ou exclua seu identificador de publicidade nas configurações do dispositivo. Em caso de dúvidas, você pode nos solicitar orientação pelo contato abaixo.</p>
+
+      <h3 id="pt-p12">12. Links externos</h3>
+      <p>Anúncios e outros conteúdos podem conter links para sites ou aplicativos de terceiros. Não somos responsáveis pelas práticas de privacidade desses serviços e recomendamos que você leia as políticas deles.</p>
+
+      <h3 id="pt-p13">13. Alterações nesta política</h3>
+      <p>Podemos atualizar esta Política de Privacidade periodicamente, por exemplo, para refletir mudanças em nossos Jogos, parceiros ou na legislação. A versão mais recente estará sempre disponível nesta página, com a data de "Última atualização" no topo. O uso contínuo dos Jogos após as alterações indica sua concordância com a política atualizada.</p>
+
+      <h3 id="pt-p14">14. Contato</h3>
+      <p>Se tiver dúvidas sobre esta Política de Privacidade ou sobre seus dados, entre em contato:</p>
+      <p><strong>Flying Apollo Studios</strong><br>
+      E-mail: <a href="mailto:SEU-EMAIL@exemplo.com">SEU-EMAIL@exemplo.com</a></p>
+    </section>
+
+    <!-- ========================= TERMOS DE USO ========================= -->
+    <section class="card">
+      <h2 id="pt-termos">Termos de Uso</h2>
+
+      <h3 id="pt-t1">1. Aceitação dos termos</h3>
+      <p>Ao baixar, instalar ou jogar qualquer Jogo da Flying Apollo Studios, você concorda com estes Termos de Uso e com a Política de Privacidade acima. Se não concordar, não utilize os Jogos. Se você for menor de idade, deve ter a permissão de seus pais ou responsáveis.</p>
+
+      <h3 id="pt-t2">2. Licença de uso</h3>
+      <p>Concedemos a você uma licença pessoal, limitada, não exclusiva, intransferível e revogável para usar os Jogos em dispositivos que você possui ou controla, apenas para fins pessoais e não comerciais, de acordo com estes Termos e com as regras da loja onde o Jogo foi obtido. Os Jogos são licenciados, e não vendidos.</p>
+
+      <h3 id="pt-t3">3. Condutas proibidas</h3>
+      <p>Você concorda em não:</p>
+      <ul>
+        <li>copiar, modificar, descompilar, fazer engenharia reversa ou criar obras derivadas dos Jogos;</li>
+        <li>utilizar trapaças, hacks, bots, automações ou softwares não autorizados;</li>
+        <li>explorar falhas (bugs) para obter vantagens, itens ou moedas indevidamente;</li>
+        <li>burlar ou manipular o sistema de compras ou de anúncios;</li>
+        <li>revender, alugar ou distribuir os Jogos ou itens virtuais;</li>
+        <li>usar os Jogos para qualquer finalidade ilegal.</li>
+      </ul>
+
+      <h3 id="pt-t4">4. Compras no aplicativo e itens virtuais</h3>
+      <ul>
+        <li>As compras são processadas pela Apple App Store ou pelo Google Play e estão sujeitas aos termos dessas plataformas.</li>
+        <li>Itens virtuais, moedas, vidas, skins e outros conteúdos digitais adquiridos são uma <strong>licença de uso dentro do Jogo</strong>, não possuem valor monetário real, não podem ser trocados por dinheiro e não são transferíveis entre contas ou Jogos.</li>
+        <li><strong>Reembolsos</strong> são tratados exclusivamente pela loja onde a compra foi feita, conforme suas políticas: <a href="https://support.apple.com/pt-br/118223" target="_blank" rel="noopener">Apple</a> ou <a href="https://support.google.com/googleplay/answer/2479637?hl=pt-BR" target="_blank" rel="noopener">Google Play</a>. Seus direitos como consumidor, previstos em lei, são sempre preservados.</li>
+        <li>Compras não consumíveis (por exemplo, "remover anúncios") podem ser restauradas pela opção "Restaurar compras", quando disponível, usando a mesma conta da loja.</li>
+        <li>Itens consumíveis podem ser perdidos se o Jogo for desinstalado ou os dados do dispositivo forem apagados, caso o Jogo não possua salvamento em nuvem.</li>
+        <li>Os preços são exibidos pela loja na moeda local e podem mudar a qualquer momento.</li>
+        <li>Pais e responsáveis são responsáveis pelas compras feitas por menores. Recomendamos ativar a exigência de senha ou aprovação para compras no dispositivo.</li>
+      </ul>
+
+      <h3 id="pt-t5">5. Publicidade</h3>
+      <p>Os Jogos gratuitos podem exibir anúncios de terceiros, incluindo anúncios em banner, intersticiais e vídeos com recompensa. Não somos responsáveis pelo conteúdo, produtos ou serviços anunciados por terceiros. Quando disponível, a compra de "remover anúncios" remove anúncios obrigatórios, podendo manter vídeos com recompensa opcionais.</p>
+
+      <h3 id="pt-t6">6. Conteúdo e classificação etária</h3>
+      <p>Nossos Jogos não contêm nudez ou conteúdo sexual explícito. A classificação indicativa de cada Jogo é informada na página da respectiva loja. Os anúncios de terceiros são filtrados de acordo com a classificação do Jogo.</p>
+
+      <h3 id="pt-t7">7. Propriedade intelectual</h3>
+      <p>Todos os direitos sobre os Jogos, incluindo código, gráficos, sons, músicas, personagens, marcas, logotipos e demais conteúdos, pertencem à Flying Apollo Studios ou a seus licenciadores e são protegidos pelas leis de direitos autorais e propriedade intelectual. Nenhum direito é transferido a você além da licença descrita nestes Termos.</p>
+
+      <h3 id="pt-t8">8. Atualizações e disponibilidade</h3>
+      <p>Podemos atualizar, modificar, suspender ou descontinuar qualquer Jogo ou recurso, total ou parcialmente, a qualquer momento. Algumas atualizações podem ser necessárias para continuar jogando. Não garantimos que os Jogos estarão disponíveis em todos os dispositivos, países ou versões de sistema operacional.</p>
+
+      <h3 id="pt-t9">9. Isenção de garantias</h3>
+      <p>Na máxima extensão permitida por lei, os Jogos são fornecidos "no estado em que se encontram" e "conforme disponíveis", sem garantias de qualquer tipo, expressas ou implícitas, incluindo garantias de funcionamento ininterrupto ou livre de erros.</p>
+
+      <h3 id="pt-t10">10. Limitação de responsabilidade</h3>
+      <p>Na máxima extensão permitida por lei, a Flying Apollo Studios não será responsável por danos indiretos, incidentais, especiais ou consequentes, incluindo perda de dados, progresso ou itens virtuais, decorrentes do uso ou da impossibilidade de uso dos Jogos. Nada nestes Termos exclui ou limita direitos que não possam ser limitados pela legislação aplicável, incluindo o Código de Defesa do Consumidor.</p>
+
+      <h3 id="pt-t11">11. Encerramento</h3>
+      <p>Você pode parar de usar os Jogos a qualquer momento, desinstalando-os. Podemos encerrar ou suspender sua licença caso você viole estes Termos. Ao final da licença, você deve deixar de usar o Jogo.</p>
+
+      <h3 id="pt-t12">12. Termos das lojas de aplicativos</h3>
+      <p>Se você obteve o Jogo pela <strong>Apple App Store</strong>, também se aplica o <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Contrato de Licença de Usuário Final Padrão da Apple (EULA)</a>. Estes Termos são celebrados entre você e a Flying Apollo Studios, e não com a Apple; a Apple não é responsável pelo Jogo nem por seu suporte ou manutenção, e a Apple e suas subsidiárias são terceiras beneficiárias destes Termos, podendo aplicá-los contra você.</p>
+      <p>Se você obteve o Jogo pelo <strong>Google Play</strong>, também se aplicam os <a href="https://play.google/intl/pt-BR_br/about/play-terms/" target="_blank" rel="noopener">Termos de Serviço do Google Play</a>.</p>
+
+      <h3 id="pt-t13">13. Lei aplicável</h3>
+      <p>Estes Termos são regidos pelas leis da República Federativa do Brasil, sem prejuízo das normas obrigatórias de proteção ao consumidor do seu país de residência.</p>
+
+      <h3 id="pt-t14">14. Alterações nestes termos</h3>
+      <p>Podemos alterar estes Termos a qualquer momento. A versão atualizada será publicada nesta página com a nova data de atualização. O uso contínuo dos Jogos após as alterações significa que você aceita os novos Termos.</p>
+
+      <h3 id="pt-t15">15. Contato e suporte</h3>
+      <p>Para dúvidas, suporte ou solicitações relacionadas aos Jogos:</p>
+      <p><strong>Flying Apollo Studios</strong><br>
+      E-mail: <a href="mailto:SEU-EMAIL@exemplo.com">SEU-EMAIL@exemplo.com</a></p>
+    </section>
+  </main>
+</div>
+
+<!-- ============================================================= -->
+<!-- ========================== ENGLISH ========================== -->
+<!-- ============================================================= -->
+<div data-lang="en">
+  <section class="hero">
+    <h1>Privacy Policy &amp; Terms of Use</h1>
+    <p class="updated">Last updated: September 14, 2026</p>
+  </section>
+
+  <main>
+    <div class="card summary">
+      <strong>Summary</strong>
+      <ul>
+        <li><strong>We do not collect, store or sell your personal data.</strong> Our games do not require registration, login or an account.</li>
+        <li>Some games display <strong>ads</strong> provided by third-party partners, who may collect device data under their own policies.</li>
+        <li>Some games offer <strong>in-app purchases</strong>, processed exclusively by the Apple App Store or Google Play. We never have access to your payment details.</li>
+        <li>Our games do not contain nudity or sexually explicit content.</li>
+      </ul>
+    </div>
+
+    <nav class="card toc" aria-label="Contents">
+      <strong>Contents</strong>
+      <ol>
+        <li><a href="#en-privacy">Privacy Policy</a></li>
+        <li><a href="#en-terms">Terms of Use</a></li>
+      </ol>
+    </nav>
+
+    <!-- ========================= PRIVACY POLICY ========================= -->
+    <section class="card">
+      <h2 id="en-privacy">Privacy Policy</h2>
+
+      <h3 id="en-p1">1. Who we are and scope</h3>
+      <p>This Privacy Policy describes how <strong>Flying Apollo Studios</strong> ("we", "our" or the "Studio") handles information related to the games and apps we publish on the Apple App Store, Google Play and other platforms (collectively, the "Games").</p>
+      <p>This policy applies to <strong>all Games</strong> published by Flying Apollo Studios, unless a specific Game provides its own supplemental policy.</p>
+
+      <h3 id="en-p2">2. Information we collect</h3>
+      <p><strong>Flying Apollo Studios does not collect, store, share or sell users' personal data.</strong> Our Games:</p>
+      <ul>
+        <li>do not require an account, registration or login;</li>
+        <li>do not ask for your name, email, phone number, address, photos, contacts or any other personal information;</li>
+        <li>do not send personal data to servers operated by the Studio.</li>
+      </ul>
+      <p>Game progress, scores and settings may be saved <strong>locally on your device only</strong>. This information is not sent to us and is deleted when you uninstall the Game (unless you use your operating system's backup or platform services such as Game Center or Google Play Games, which are governed by Apple's and Google's policies).</p>
+
+      <h3 id="en-p3">3. Third-party advertising</h3>
+      <p>Some of our Games are free and display ads to support development. Ads are served by third-party ad networks which, <strong>independently of us</strong>, may collect and process information from your device to deliver ads, measure performance and prevent fraud. This may include:</p>
+      <ul>
+        <li>the device advertising identifier (Google Advertising ID on Android or IDFA on iOS, when permitted);</li>
+        <li>IP address and approximate location (country/city derived from IP);</li>
+        <li>device model, operating system, language and carrier;</li>
+        <li>ad interaction data (impressions and clicks);</li>
+        <li>diagnostic and performance data from the ad SDK.</li>
+      </ul>
+      <p>Depending on the Game, advertising partners may include:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Partner</th><th>Privacy policy</th></tr></thead>
+          <tbody>
+            <tr><td>Google AdMob</td><td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></td></tr>
+            <tr><td>Unity Ads / Unity LevelPlay</td><td><a href="https://unity.com/legal/game-player-and-app-user-privacy-policy" target="_blank" rel="noopener">unity.com/legal/privacy</a></td></tr>
+            <tr><td>AppLovin</td><td><a href="https://www.applovin.com/privacy/" target="_blank" rel="noopener">applovin.com/privacy</a></td></tr>
+            <tr><td>Meta Audience Network</td><td><a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">facebook.com/privacy/policy</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Flying Apollo Studios does not receive personally identifiable data from these networks; we only receive aggregated, anonymous reports (for example, total ad impressions and revenue).</p>
+
+      <h3 id="en-p4">4. Personalized ads and your consent</h3>
+      <ul>
+        <li><strong>iOS (App Tracking Transparency):</strong> on iPhone and iPad, the advertising identifier (IDFA) is only accessed if you allow it in the system prompt. You can change this at any time in <em>Settings &gt; Privacy &amp; Security &gt; Tracking</em>.</li>
+        <li><strong>Android:</strong> you can reset or delete your advertising ID in <em>Settings &gt; Google &gt; Ads</em> (or <em>Settings &gt; Privacy &gt; Ads</em>, depending on your device).</li>
+        <li><strong>European Economic Area, United Kingdom, Switzerland and other regions:</strong> where required by law, we display a consent form before showing personalized ads. If you decline, only non-personalized ads may be shown.</li>
+      </ul>
+      <p>Declining tracking does not prevent you from playing; it only makes ads less relevant to you.</p>
+
+      <h3 id="en-p5">5. In-app purchases</h3>
+      <p>Some Games offer optional in-app purchases (for example, ad removal, virtual currency, items or additional content). All transactions are <strong>processed exclusively by the Apple App Store or Google Play</strong>.</p>
+      <ul>
+        <li>We <strong>do not collect or have access to</strong> credit card, bank account or other payment information.</li>
+        <li>We only receive confirmation from the store that the purchase was completed (a technical receipt, without your personal data), so the purchased item can be delivered.</li>
+        <li>Your payment data is governed by <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple's Privacy Policy</a> or <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</li>
+      </ul>
+
+      <h3 id="en-p6">6. Game engine, diagnostics and platform services</h3>
+      <p>Our Games may be built with third-party engines and tools (such as Unity) that may collect anonymous technical data, such as crash and performance information, to ensure proper operation. The stores (Apple and Google) may also provide us with <strong>aggregated, anonymous</strong> install and usage statistics. This data does not allow us to identify you.</p>
+
+      <h3 id="en-p7">7. Device permissions</h3>
+      <p>Our Games only request permissions required for them to work, usually internet access (to display ads and process purchases). We do not access your camera, microphone, contacts, photos or precise location, unless a specific Game feature requires it and you expressly allow it.</p>
+
+      <h3 id="en-p8">8. Children's privacy</h3>
+      <p>We do not knowingly collect personal data from children under 13 (or the minimum age defined by the laws of your country, such as COPPA in the United States, GDPR in the European Union and LGPD in Brazil).</p>
+      <p>When a Game is directed to children or participates in programs such as the App Store <em>Kids</em> category or the Google Play <em>Families</em> program:</p>
+      <ul>
+        <li>we only use ad networks certified/approved for that audience;</li>
+        <li>we only display <strong>non-personalized</strong>, age-appropriate ads, with "child-directed treatment" settings enabled;</li>
+        <li>we do not request the advertising identifier for tracking;</li>
+        <li>purchases and external links may be protected by a parental gate.</li>
+      </ul>
+      <p>We recommend that parents and guardians supervise use of the Games and use device parental controls (Screen Time on iOS or Family Link on Android) to manage purchases. If you believe a child has provided us with personal data, please contact us and we will take appropriate action.</p>
+
+      <h3 id="en-p9">9. Security</h3>
+      <p>Since we do not collect or store personal data on our servers, the risk of such information being exposed by us is minimal. Even so, we choose trusted, well-established partners that apply appropriate security measures.</p>
+
+      <h3 id="en-p10">10. Your rights (GDPR, CCPA, LGPD and other laws)</h3>
+      <p>Depending on where you live, you may have the right to access, correct, delete, port or object to the processing of your personal data, and to withdraw your consent. Because Flying Apollo Studios <strong>does not hold personal data about you</strong>, we will typically have no information to provide or delete. For data processed by third parties:</p>
+      <ul>
+        <li>adjust tracking and ad permissions on your device (see section 4);</li>
+        <li>contact the ad networks directly using the links in section 3;</li>
+        <li>for purchase data, contact Apple or Google.</li>
+      </ul>
+      <p>We do not sell personal information as defined by the CCPA/CPRA (California).</p>
+
+      <h3 id="en-p11">11. Data deletion</h3>
+      <p>To delete all Game data stored on your device, simply <strong>uninstall the Game</strong>. To limit data used by ad networks, reset or delete your advertising identifier in your device settings. If you have questions, you can contact us for guidance using the details below.</p>
+
+      <h3 id="en-p12">12. External links</h3>
+      <p>Ads and other content may contain links to third-party websites or apps. We are not responsible for the privacy practices of those services and encourage you to review their policies.</p>
+
+      <h3 id="en-p13">13. Changes to this policy</h3>
+      <p>We may update this Privacy Policy from time to time, for example to reflect changes to our Games, partners or applicable law. The latest version will always be available on this page, with the "Last updated" date at the top. Continued use of the Games after changes means you accept the updated policy.</p>
+
+      <h3 id="en-p14">14. Contact</h3>
+      <p>If you have any questions about this Privacy Policy or your data, please contact us:</p>
+      <p><strong>Flying Apollo Studios</strong><br>
+      Email: <a href="mailto:SEU-EMAIL@exemplo.com">SEU-EMAIL@exemplo.com</a></p>
+    </section>
+
+    <!-- ========================= TERMS OF USE ========================= -->
+    <section class="card">
+      <h2 id="en-terms">Terms of Use</h2>
+
+      <h3 id="en-t1">1. Acceptance of terms</h3>
+      <p>By downloading, installing or playing any Flying Apollo Studios Game, you agree to these Terms of Use and to the Privacy Policy above. If you do not agree, do not use the Games. If you are a minor, you must have permission from a parent or legal guardian.</p>
+
+      <h3 id="en-t2">2. License</h3>
+      <p>We grant you a personal, limited, non-exclusive, non-transferable and revocable license to use the Games on devices you own or control, for personal, non-commercial purposes only, in accordance with these Terms and the rules of the store where you obtained the Game. The Games are licensed, not sold.</p>
+
+      <h3 id="en-t3">3. Prohibited conduct</h3>
+      <p>You agree not to:</p>
+      <ul>
+        <li>copy, modify, decompile, reverse engineer or create derivative works of the Games;</li>
+        <li>use cheats, hacks, bots, automation or unauthorized software;</li>
+        <li>exploit bugs to improperly obtain advantages, items or currency;</li>
+        <li>circumvent or tamper with the purchase or advertising systems;</li>
+        <li>resell, rent or distribute the Games or virtual items;</li>
+        <li>use the Games for any unlawful purpose.</li>
+      </ul>
+
+      <h3 id="en-t4">4. In-app purchases and virtual items</h3>
+      <ul>
+        <li>Purchases are processed by the Apple App Store or Google Play and are subject to those platforms' terms.</li>
+        <li>Virtual items, currency, lives, skins and other digital content you acquire are a <strong>limited license for use within the Game</strong>, have no real-world monetary value, cannot be exchanged for cash and are not transferable between accounts or Games.</li>
+        <li><strong>Refunds</strong> are handled exclusively by the store where the purchase was made, under its policies: <a href="https://support.apple.com/118223" target="_blank" rel="noopener">Apple</a> or <a href="https://support.google.com/googleplay/answer/2479637" target="_blank" rel="noopener">Google Play</a>. Your statutory consumer rights are always preserved.</li>
+        <li>Non-consumable purchases (for example, "remove ads") can be restored using the "Restore Purchases" option, when available, with the same store account.</li>
+        <li>Consumable items may be lost if the Game is uninstalled or device data is erased, if the Game does not offer cloud saving.</li>
+        <li>Prices are displayed by the store in your local currency and may change at any time.</li>
+        <li>Parents and guardians are responsible for purchases made by minors. We recommend requiring a password or approval for purchases on the device.</li>
+      </ul>
+
+      <h3 id="en-t5">5. Advertising</h3>
+      <p>Free Games may display third-party ads, including banners, interstitials and rewarded videos. We are not responsible for the content, products or services advertised by third parties. Where available, the "remove ads" purchase removes mandatory ads and may keep optional rewarded videos.</p>
+
+      <h3 id="en-t6">6. Content and age rating</h3>
+      <p>Our Games do not contain nudity or sexually explicit content. Each Game's age rating is shown on its store page. Third-party ads are filtered according to the Game's rating.</p>
+
+      <h3 id="en-t7">7. Intellectual property</h3>
+      <p>All rights in the Games, including code, graphics, sounds, music, characters, trademarks, logos and other content, belong to Flying Apollo Studios or its licensors and are protected by copyright and intellectual property laws. No rights are transferred to you other than the license described in these Terms.</p>
+
+      <h3 id="en-t8">8. Updates and availability</h3>
+      <p>We may update, modify, suspend or discontinue any Game or feature, in whole or in part, at any time. Some updates may be required to keep playing. We do not guarantee that the Games will be available on every device, country or operating system version.</p>
+
+      <h3 id="en-t9">9. Disclaimer of warranties</h3>
+      <p>To the fullest extent permitted by law, the Games are provided "as is" and "as available", without warranties of any kind, express or implied, including warranties of uninterrupted or error-free operation.</p>
+
+      <h3 id="en-t10">10. Limitation of liability</h3>
+      <p>To the fullest extent permitted by law, Flying Apollo Studios shall not be liable for any indirect, incidental, special or consequential damages, including loss of data, progress or virtual items, arising from the use of or inability to use the Games. Nothing in these Terms excludes or limits rights that cannot be limited under applicable law, including consumer protection laws.</p>
+
+      <h3 id="en-t11">11. Termination</h3>
+      <p>You may stop using the Games at any time by uninstalling them. We may terminate or suspend your license if you breach these Terms. Upon termination, you must stop using the Game.</p>
+
+      <h3 id="en-t12">12. App store terms</h3>
+      <p>If you obtained the Game from the <strong>Apple App Store</strong>, Apple's <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Licensed Application End User License Agreement (Standard EULA)</a> also applies. These Terms are between you and Flying Apollo Studios, not Apple; Apple is not responsible for the Game or its support or maintenance, and Apple and its subsidiaries are third-party beneficiaries of these Terms and may enforce them against you.</p>
+      <p>If you obtained the Game from <strong>Google Play</strong>, the <a href="https://play.google/about/play-terms/" target="_blank" rel="noopener">Google Play Terms of Service</a> also apply.</p>
+
+      <h3 id="en-t13">13. Governing law</h3>
+      <p>These Terms are governed by the laws of the Federative Republic of Brazil, without prejudice to the mandatory consumer protection laws of your country of residence.</p>
+
+      <h3 id="en-t14">14. Changes to these terms</h3>
+      <p>We may change these Terms at any time. The updated version will be posted on this page with a new "Last updated" date. Continued use of the Games after changes means you accept the new Terms.</p>
+
+      <h3 id="en-t15">15. Contact and support</h3>
+      <p>For questions, support or requests related to the Games:</p>
+      <p><strong>Flying Apollo Studios</strong><br>
+      Email: <a href="mailto:SEU-EMAIL@exemplo.com">SEU-EMAIL@exemplo.com</a></p>
+    </section>
+  </main>
+</div>
+
+<footer>
+  &copy; <span id="year">2026</span> Flying Apollo Studios.
+  <span data-lang="pt">Todos os direitos reservados.</span>
+  <span data-lang="en">All rights reserved.</span>
+</footer>
+
+<script>
+  // Troca de idioma sem recarregar a página
+  document.querySelectorAll('.lang-switch a').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      var lang = link.getAttribute('data-set');
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+      document.title = lang === 'pt'
+        ? 'Política de Privacidade e Termos de Uso | Flying Apollo Studios'
+        : 'Privacy Policy & Terms of Use | Flying Apollo Studios';
+      try {
+        localStorage.setItem('fas-lang', lang);
+        history.replaceState(null, '', '?lang=' + lang);
+      } catch (err) {}
+      window.scrollTo(0, 0);
+    });
+  });
+  if (document.documentElement.lang === 'en') {
+    document.title = 'Privacy Policy & Terms of Use | Flying Apollo Studios';
+  }
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
