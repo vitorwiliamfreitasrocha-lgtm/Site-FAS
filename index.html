@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flying Apollo Studios</title>
+  <meta name="description" content="Flying Apollo Studios - estúdio independente de jogos mobile. Independent mobile game studio.">
+  <script>
+    // Mesmo seletor de idioma da página de privacidade
+    (function () {
+      var lang;
+      try {
+        var p = new URLSearchParams(window.location.search).get('lang');
+        if (p === 'pt' || p === 'en') lang = p;
+        if (!lang) lang = localStorage.getItem('fas-lang');
+      } catch (e) {}
+      if (lang !== 'pt' && lang !== 'en') {
+        lang = (navigator.language || 'en').toLowerCase().indexOf('pt') === 0 ? 'pt' : 'en';
+      }
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+    })();
+  </script>
+  <style>
+    :root {
+      --bg: #10163a;
+      --bg-2: #070a1c;
+      --text: #ffffff;
+      --muted: #b8bdd6;
+      --accent: #ff7a2f;
+      --card: rgba(255,255,255,.06);
+      --border: rgba(255,255,255,.14);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background: radial-gradient(ellipse at top, var(--bg) 0%, var(--bg-2) 70%);
+      background-color: var(--bg-2);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+    }
+
+    html[lang="en"] [data-lang="pt"],
+    html:not([lang="en"]) [data-lang="en"] { display: none !important; }
+
+    header {
+      max-width: 960px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .lang-switch {
+      display: inline-flex;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .lang-switch a {
+      color: var(--text);
+      text-decoration: none;
+      padding: 4px 14px;
+      font-size: .85rem;
+      font-weight: 600;
+    }
+    html:not([lang="en"]) .lang-switch a[data-set="pt"],
+    html[lang="en"] .lang-switch a[data-set="en"] {
+      background: var(--accent);
+      color: #10163a;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px 20px 60px;
+    }
+    .logo {
+      font-size: clamp(2.2rem, 8vw, 4.2rem);
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.05;
+      margin: 0;
+    }
+    .logo span { color: var(--accent); }
+    .tagline {
+      color: var(--muted);
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      margin: 16px 0 36px;
+      max-width: 520px;
+    }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 22px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: var(--card);
+    }
+    .btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #10163a;
+    }
+    .btn:hover { filter: brightness(1.1); }
+    .contact {
+      margin-top: 36px;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+    .contact a { color: var(--text); }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: .85rem;
+      padding: 20px;
+    }
+    footer a { color: var(--muted); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="lang-switch" role="group" aria-label="Idioma / Language">
+    <a href="?lang=pt" data-set="pt" hreflang="pt-BR">PT</a>
+    <a href="?lang=en" data-set="en" hreflang="en">EN</a>
+  </div>
+</header>
+
+<main>
+  <h1 class="logo">FLYING <span>APOLLO</span><br>STUDIOS</h1>
+
+  <p class="tagline" data-lang="pt">Estúdio independente de jogos para celular.</p>
+  <p class="tagline" data-lang="en">Independent mobile game studio.</p>
+
+  <div class="links">
+    <a class="btn primary" href="privacy.html" data-lang="pt">Política de Privacidade</a>
+    <a class="btn" href="privacy.html#pt-termos" data-lang="pt">Termos de Uso</a>
+    <a class="btn primary" href="privacy.html" data-lang="en">Privacy Policy</a>
+    <a class="btn" href="privacy.html#en-terms" data-lang="en">Terms of Use</a>
+  </div>
+
+  <p class="contact">
+    <span data-lang="pt">Contato e suporte:</span>
+    <span data-lang="en">Contact &amp; support:</span>
+    <a href="mailto:SEU-EMAIL@exemplo.com">SEU-EMAIL@exemplo.com</a>
+  </p>
+</main>
+
+<footer>
+  &copy; <span id="year">2026</span> Flying Apollo Studios &middot;
+  <a href="privacy.html" data-lang="pt">Privacidade</a>
+  <a href="privacy.html" data-lang="en">Privacy</a>
+</footer>
+
+<script>
+  document.querySelectorAll('.lang-switch a').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      var lang = link.getAttribute('data-set');
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+      try {
+        localStorage.setItem('fas-lang', lang);
+        history.replaceState(null, '', '?lang=' + lang);
+      } catch (err) {}
+    });
+  });
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
