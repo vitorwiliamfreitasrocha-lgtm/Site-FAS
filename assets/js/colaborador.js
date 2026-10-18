@@ -25,7 +25,7 @@
       vsLast: 'vs. mês anterior', urgent: 'de prioridade alta', ytd: 'Jan até hoje', margin: 'margem', perThousand: 'por mil impressões',
       onTrack: 'no prazo', atRisk: 'em risco', late: 'atrasado(s)',
       admobOff: 'AdMob ainda não conectado. No PC de administração, rode: python configurar_segredos.py admob --client-json <arquivo>',
-      admobErr: 'Não foi possível ler o AdMob agora. Tente de novo mais tarde.', stale: 'Dados do AdMob desatualizados',
+      admobErr: 'Não foi possível ler o AdMob agora. Tente de novo mais tarde.', stale: 'Dados do AdMob desatualizados', nextAt: 'próxima', refreshNow: '↻ Atualizar agora',
       admobLive: 'AdMob · atualizado', empty: 'Nada cadastrado ainda.', emptyHint: 'Edite C:\\FastudiosAPI\\dados\\painel.json no HAZ.',
       noData: 'Sem dados', loading: 'Carregando…', noAccess: 'Seu acesso não inclui finanças.' },
     en: { tituloPagina: 'Team Area · Flying Apollo Studios', back: 'Back to site', collabArea: 'Team Area', login: 'Login', password: 'Password',
@@ -44,7 +44,7 @@
       vsLast: 'vs. last month', urgent: 'high priority', ytd: 'Jan to date', margin: 'margin', perThousand: 'per thousand impressions',
       onTrack: 'on track', atRisk: 'at risk', late: 'delayed',
       admobOff: 'AdMob not connected yet. On the admin PC, run: python configurar_segredos.py admob --client-json <file>',
-      admobErr: 'Could not read AdMob right now. Try again later.', stale: 'AdMob data is stale',
+      admobErr: 'Could not read AdMob right now. Try again later.', stale: 'AdMob data is stale', nextAt: 'next', refreshNow: '↻ Refresh now',
       admobLive: 'AdMob · updated', empty: 'Nothing here yet.', emptyHint: 'Edit C:\\FastudiosAPI\\dados\\painel.json on HAZ.',
       noData: 'No data', loading: 'Loading…', noAccess: 'Your access does not include finance.' }
   });
@@ -115,9 +115,12 @@
     if (!a || !a.conectado) { s.hidden = true; return; }
     s.hidden = false;
     s.className = 'selo' + (a.desatualizado ? ' alerta' : '');
-    var quando = a.atualizado_em ? new Date(a.atualizado_em.replace(/([+-]\d{2})(\d{2})$/, '$1:$2')) : null;
+    var hora = function (iso) {
+      var d = iso ? new Date(iso.replace(/([+-]\d{2})(\d{2})$/, '$1:$2')) : null;
+      return d && !isNaN(d) ? d.toLocaleTimeString(loc(), { hour: '2-digit', minute: '2-digit' }) : '';
+    };
     s.textContent = a.desatualizado ? FAS.t('stale') :
-      FAS.t('admobLive') + (quando && !isNaN(quando) ? ' ' + quando.toLocaleTimeString(loc(), { hour: '2-digit', minute: '2-digit' }) : '');
+      FAS.t('admobLive') + ' ' + hora(a.atualizado_em) + (a.proxima_em ? ' · ' + FAS.t('nextAt') + ' ' + hora(a.proxima_em) : '');
   }
 
   // ---------- paginas ----------
@@ -182,6 +185,10 @@
       var T = FAS.t, a = d.admob || {}, k = a.kpis || {}, m = d.manual || {}, moeda = a.moeda;
       seloAdmob(a);
       var html = avisoAdmob(a);
+      if (d.pode_atualizar && a.conectado) {
+        html = '<div style="display:flex;justify-content:flex-end;margin-bottom:-12px"><button type="button" class="ver-tudo" data-atualizar-admob>' +
+          esc(T('refreshNow')) + '</button></div>' + html;
+      }
       var custoAno = +m.custos_ano || 0, receitaAno = +k.receita_ano || 0;
       var iapAno = 0, ano = String(new Date().getFullYear());
       Object.keys(m.compras_app_mensal || {}).forEach(function (mm) { if (mm.indexOf(ano) === 0) iapAno += +m.compras_app_mensal[mm] || 0; });
@@ -283,7 +290,7 @@
     $('hoje').textContent = new Date().toLocaleDateString(loc(), { weekday: 'long', day: 'numeric', month: 'long' });
   }
 
-  function rota(p) { return p === 'overview' ? '/collab/overview' : '/collab/' + p; }
+  function rota(p, forcar) { return p === 'overview' ? '/collab/overview' : '/collab/' + p + (forcar && p === 'finance' ? '?atualizar=1' : ''); }
 
   function mostrar(p, forcar) {
     if (paginasVisiveis().indexOf(p) < 0) p = 'overview';
@@ -301,7 +308,7 @@
     if (cache[p] && !forcar) { desenhar(cache[p]); return; }
     el.innerHTML = '<div class="carregando">' + esc(FAS.t('loading')) + '</div>';
     el.classList.add('on');
-    FAS.api(rota(p), { token: token }).then(function (r) {
+    FAS.api(rota(p, forcar), { token: token, timeout: 60000 }).then(function (r) {
       if (meu !== pedido) return;
       if (r.status === 401) return sair(FAS.t('sessionEnd'));
       if (r.status === 403) { el.innerHTML = '<div class="c-card"><div class="c-vazio">' + esc(FAS.t('noAccess')) + '</div></div>'; return; }
@@ -376,6 +383,7 @@
         if (p !== pagina) { try { history.replaceState(null, '', '#' + p); } catch (x) {} mostrar(p); window.scrollTo(0, 0); }
         return;
       }
+      if (e.target.closest('[data-atualizar-admob]')) { mostrar('finance', true); return; }
       if (e.target.closest('[data-sair]')) sair();
     });
     FAS.aoTrocarIdioma(function () {
