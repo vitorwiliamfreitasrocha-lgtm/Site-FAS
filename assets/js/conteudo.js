@@ -1,6 +1,5 @@
 // Conteudo publico da Home. Edite aqui: jogos, lojas, videos e bastidores.
-// Secao sem conteudo real some sozinha (ex.: Trailers aparece quando algum
-// trailer tiver `youtube`; Bastidores aparece quando WIP tiver itens).
+// Video sem `youtube` mostra "Video ainda nao publicado"; capa sem `cover` mostra "Capa em breve".
 (function () {
   'use strict';
 
@@ -53,11 +52,14 @@
     { game: 'Shelf & Sell', kind: 'preview', youtube: null, cover: null }
   ];
 
-  // Projetos publicos (secao Bastidores). Vazio = secao escondida.
-  // Exemplo do design (rascunho, NAO publicado):
-  // { game: 'Rare Minerals Inc.', icon: '/assets/img/games/rare-minerals-icon.png',
-  //   pt: ['Versão 2.0 · Bioma Vulcânico', 'Beta'], en: ['Version 2.0 · Volcanic Biome', 'Beta'], pct: 82 },
-  var WIP = [];
+  // Projetos publicos (secao Bastidores): [titulo, etapa] em cada idioma e progresso em %.
+  // Textos vindos do design: ajuste para o andamento real.
+  var WIP = [
+    { game: 'Rare Minerals Inc.', icon: '/assets/img/games/rare-minerals-icon.png', pt: ['Versão 2.0 · Bioma Vulcânico', 'Beta'], en: ['Version 2.0 · Volcanic Biome', 'Beta'], pct: 82 },
+    { game: 'Fallstate', icon: '/assets/img/games/fallstate-icon.png', pt: ['Atualização 1.4 · Alianças', 'Produção'], en: ['Update 1.4 · Alliances', 'Production'], pct: 64 },
+    { game: 'Shelf & Sell', icon: '/assets/img/games/shelf-and-sell-icon.png', pt: ['Chegando ao PC pela Steam', 'Alpha'], en: ['Coming to PC on Steam', 'Alpha'], pct: 45 },
+    { game: '???', icon: null, pt: ['Novo jogo · em segredo', 'Protótipo'], en: ['New game · top secret', 'Prototype'], pct: 20 }
+  ];
 
   window.FAS_CONTEUDO = { GAMES: GAMES, STORES: STORES, DEVLOG: DEVLOG, TRAILERS: TRAILERS, WIP: WIP };
 })();

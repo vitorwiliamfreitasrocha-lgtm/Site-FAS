@@ -15,7 +15,7 @@
       fGames: 'jogos publicados', fPlat: 'plataformas', fWip: 'projetos em andamento',
       nlTitle: 'Novidades antes de todo mundo', nlText: 'Prévias, datas de lançamento e acesso antecipado a betas. Um e-mail por mês, no máximo.',
       nlBtn: 'Inscrever', nlDone: 'Inscrito ✓', nlNote: 'Sem spam. Cancele quando quiser.', nlOk: 'Pronto! Você vai receber nossa próxima edição.',
-      nlErr: 'Digite um e-mail válido.', noVideo: 'Vídeo ainda não publicado.' },
+      nlErr: 'Digite um e-mail válido.', noVideo: 'Vídeo ainda não publicado.', coverSoon: 'Capa em breve' },
     en: { seeGame: 'View game', ourGames: 'Our games', hint: '← → to browse · Enter to open', hintM: 'Swipe to switch · tap to open',
       soon: 'Coming soon', priceLabel: 'Price', platforms: 'Platforms', getIt: 'Where to play', storesSoon: 'Store links coming soon.', screens: 'Screenshots',
       bKicker: 'Behind the scenes', bTitle: 'What we are working on', bText: 'Updates, new games and everyday life at the studio. Follow every step until it lands on your phone.',
@@ -25,7 +25,7 @@
       fGames: 'games released', fPlat: 'platforms', fWip: 'projects in progress',
       nlTitle: 'News before everyone else', nlText: 'Previews, release dates and early beta access. One email a month, at most.',
       nlBtn: 'Subscribe', nlDone: 'Subscribed ✓', nlNote: 'No spam. Unsubscribe anytime.', nlOk: 'Done! You will get our next issue.',
-      nlErr: 'Enter a valid email.', noVideo: 'Video not published yet.' }
+      nlErr: 'Enter a valid email.', noVideo: 'Video not published yet.', coverSoon: 'Cover coming soon' }
   });
 
   var ativo = 0, aberto = null, ultimoHover = 0, scr, video = null;
@@ -144,18 +144,24 @@
   function fecharVideo() { video = null; $('videoModal').classList.remove('aberto'); $('videoTela').innerHTML = ''; }
 
   // ---------- secoes ----------
+  function capaVazia() {
+    return '<span class="capa-ph"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">' +
+      '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>' +
+      '<span>' + FAS.esc(FAS.t('coverSoon')) + '</span></span>';
+  }
+
   function pintarSecoes() {
-    var d = C.DEVLOG, temDevlog = !!d.youtube, wip = C.WIP || [];
-    var trailers = (C.TRAILERS || []).filter(function (v) { return v.youtube; });
+    var d = C.DEVLOG, wip = C.WIP || [], trailers = C.TRAILERS || [];
     var n = 1;
-    $('bastidores').hidden = !(temDevlog || wip.length);
+    $('bastidores').hidden = !(d || wip.length);
     if (!$('bastidores').hidden) {
       n++;
-      $('devlog').hidden = !temDevlog;
+      $('devlog').hidden = !d;
       $('devlogRotulo').textContent = d.label;
       $('devlogTitulo').textContent = d[L()] || d.pt;
       var capa = $('devlogCapa');
-      if (d.cover) { capa.className = 'capa'; capa.style.backgroundImage = urlImg(d.cover); }
+      if (d.cover) { capa.className = 'capa'; capa.style.backgroundImage = urlImg(d.cover); capa.innerHTML = ''; }
+      else capa.innerHTML = capaVazia();
       $('wip').innerHTML = wip.map(function (w) {
         var tx = w[L()] || w.pt;
         return '<div class="wip-item"><span class="icone-jogo"' + (w.icon ? ' style="background-image:' + urlImg(w.icon) + '"' : '') + '>' + (w.icon ? '' : '?') + '</span>' +
@@ -168,7 +174,7 @@
     if (trailers.length) {
       $('trNum').textContent = String(n++).padStart(2, '0');
       $('trailerLista').innerHTML = trailers.map(function (v, i) {
-        return '<div class="trailer" data-reveal><div class="capa' + (v.cover ? '' : ' capa-vazia') + '"' + (v.cover ? ' style="background-image:' + urlImg(v.cover) + '"' : '') + '></div>' +
+        return '<div class="trailer" data-reveal><div class="capa' + (v.cover ? '' : ' capa-vazia') + '"' + (v.cover ? ' style="background-image:' + urlImg(v.cover) + '"' : '') + '>' + (v.cover ? '' : capaVazia()) + '</div>' +
           '<div class="trailer-rodape"><span><span class="rotulo" style="letter-spacing:.1em">' + FAS.esc(FAS.t(v.kind)) + '</span><b>' + FAS.esc(v.game) + '</b></span>' +
           '<button type="button" class="btn-play" data-trailer="' + i + '" aria-label="' + FAS.esc(FAS.t('watch')) + '"><i></i></button></div></div>';
       }).join('');
@@ -287,7 +293,7 @@
     $('trailerLista').addEventListener('click', function (e) {
       var b = e.target.closest('[data-trailer]');
       if (!b) return;
-      var v = C.TRAILERS.filter(function (x) { return x.youtube; })[+b.getAttribute('data-trailer')];
+      var v = C.TRAILERS[+b.getAttribute('data-trailer')];
       abrirVideo(v.game + ' · ' + FAS.t(v.kind), v.youtube);
     });
     $('nlForm').addEventListener('submit', inscrever);

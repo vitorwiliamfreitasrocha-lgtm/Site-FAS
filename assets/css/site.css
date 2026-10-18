@@ -157,7 +157,9 @@ textarea.input { resize: vertical; font: 400 15px/1.5 var(--geist); }
 .secao-cab p { margin: 0; max-width: 380px; font-size: 16px; line-height: 1.6; color: rgba(255,255,255,.65); text-wrap: pretty; }
 .grade-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 20px; align-items: stretch; }
 .capa { position: relative; aspect-ratio: 16/9; border-radius: 20px; overflow: hidden; background: var(--painel) center/cover no-repeat; border: 1px solid var(--borda); }
-.capa-vazia { display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 12px; color: rgba(255,255,255,.3); }
+.capa-vazia { display: flex; align-items: center; justify-content: center; background: #10131D; border: 1px dashed rgba(255,255,255,.18); }
+.capa-ph { display: flex; flex-direction: column; align-items: center; gap: 10px; font-size: 13px; color: rgba(255,255,255,.55); }
+.capa-ph svg { color: rgba(255,255,255,.5); }
 .devlog-rodape { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 14px; }
 .devlog-rodape > span { display: flex; flex-direction: column; gap: 4px; }
 .devlog-rodape b { font-size: 17px; font-weight: 500; }
