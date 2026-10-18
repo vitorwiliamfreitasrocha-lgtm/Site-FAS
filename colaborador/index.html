@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://haz.tail5f7589.ts.net; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex, nofollow">
+<meta name="fas-titulo" content="tituloPagina">
+<title>Área do Colaborador · Flying Apollo Studios</title>
+<meta name="theme-color" content="#04050A">
+<link rel="icon" href="/assets/img/games/rare-minerals-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script src="/assets/js/config.js" defer></script>
+<script src="/assets/js/comum.js" defer></script>
+<script src="/assets/js/colaborador.js" defer></script>
+</head>
+<body>
+<main class="c-login" id="telaLogin" hidden>
+  <header class="c-login-topo"><a href="/">← <span data-t="back"></span></a><span id="idiomaLogin"></span></header>
+  <div class="c-login-meio">
+    <form id="formLogin" novalidate>
+      <div class="c-apollo"><img src="/assets/img/logo-apollo.png" alt=""></div>
+      <div class="c-login-tit"><span class="kicker">Flying Apollo Studios</span><h1 class="silk" data-t="collabArea"></h1></div>
+      <label class="campo"><span data-t="login"></span>
+        <input class="input" id="usuario" autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="40" inputmode="text" placeholder="0001">
+      </label>
+      <label class="campo"><span data-t="password"></span>
+        <input class="input" type="password" id="senha" autocomplete="current-password" maxlength="256" placeholder="••••••••">
+      </label>
+      <span class="erro-msg" id="erroLogin" role="alert" hidden></span>
+      <button type="submit" class="btn btn-branco" id="btnEntrar" data-t="enter"></button>
+      <span class="c-nota" data-t="loginNote"></span>
+    </form>
+  </div>
+</main>
+
+<div class="c-app" id="telaApp" hidden>
+  <div class="c-barra">
+    <div class="c-barra-topo">
+      <span id="marcaMob"></span>
+      <button type="button" class="c-sair-mob" data-sair><span class="avatar" data-iniciais></span><span data-t="logout"></span></button>
+    </div>
+    <div class="c-abas" id="abasMob" role="tablist"></div>
+  </div>
+  <aside class="c-lateral">
+    <span id="marcaLat"></span>
+    <nav class="c-nav" id="navLat" aria-label="Painel"></nav>
+    <div class="c-usuario"><span class="avatar" data-iniciais></span><span><b id="nomeColab"></b><button type="button" data-sair data-t="logout"></button></span></div>
+  </aside>
+  <main class="c-main">
+    <div class="c-cab">
+      <div><span class="kicker" id="hoje"></span><h1 class="silk" id="tituloPag"></h1></div>
+      <div class="c-cab-dir"><span class="selo" id="seloDados" hidden></span><span id="idiomaApp"></span></div>
+    </div>
+    <div class="c-pagina" id="pagina"></div>
+  </main>
+</div>
+</body>
+</html>

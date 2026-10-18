@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://haz.tail5f7589.ts.net; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<meta name="fas-titulo" content="tituloPagina">
+<title>Área do Usuário · Flying Apollo Studios</title>
+<meta name="theme-color" content="#04050A">
+<link rel="icon" href="/assets/img/games/rare-minerals-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script src="/assets/js/config.js" defer></script>
+<script src="/assets/js/comum.js" defer></script>
+<script src="/assets/js/usuario.js" defer></script>
+</head>
+<body class="pag-usuario">
+<header class="topo topo-linha" id="topo"></header>
+
+<main class="u-login" id="telaLogin" hidden>
+  <div class="u-hero">
+    <span class="kicker" data-t="kicker"></span>
+    <h1 class="silk" data-t="heroTitle"></h1>
+    <p data-t="heroText"></p>
+    <div class="passos"><span><b>01</b><em data-t="step1" style="font-style:normal"></em></span><span><b>02</b><em data-t="step2" style="font-style:normal"></em></span><span><b>03</b><em data-t="step3" style="font-style:normal"></em></span></div>
+  </div>
+
+  <form class="cartao-login" id="formLogin" novalidate>
+    <div class="abas" role="tablist" id="abas">
+      <button type="button" role="tab" data-modo="login" data-t="signIn"></button>
+      <button type="button" role="tab" data-modo="signup" data-t="signUp"></button>
+    </div>
+    <p id="modoTexto" class="c-vazio" hidden style="margin:0"></p>
+    <label class="campo" id="campoNome" hidden><span data-t="name"></span>
+      <input class="input" id="nome" autocomplete="name" maxlength="80" data-t-ph="namePh">
+    </label>
+    <label class="campo" id="campoEmail">E-mail
+      <input class="input" type="email" id="email" autocomplete="email" maxlength="254" placeholder="voce@email.com">
+    </label>
+    <label class="campo" id="campoSenha">
+      <span class="rotulo-linha"><span id="rotuloSenha" data-t="password"></span><button type="button" class="link-btn" id="btnEsqueci" data-t="forgot"></button></span>
+      <input class="input" type="password" id="senha" autocomplete="current-password" maxlength="128" placeholder="••••••••">
+    </label>
+    <span class="erro-msg" id="erroLogin" role="alert" hidden></span>
+    <span class="ok-msg" id="okLogin" role="status" hidden></span>
+    <button type="submit" class="btn btn-azul" id="btnEntrar"></button>
+    <button type="button" class="link-btn" id="btnVoltar" hidden data-t="backToLogin" style="align-self:center"></button>
+    <span class="nota-legal"><span data-t="legalNote"></span> <a href="/termos/" data-t="termsShort"></a> · <a href="/privacidade/" data-t="privacyShort"></a></span>
+  </form>
+</main>
+
+<main class="u-logado" id="telaTickets" hidden>
+  <div class="u-cab">
+    <div>
+      <span class="kicker"><span data-t="hello"></span>, <span id="nomeUsuario"></span></span>
+      <h1 class="silk" data-t="myTickets"></h1>
+    </div>
+    <div class="acoes">
+      <button type="button" class="btn btn-contorno" id="btnSair" data-t="logout"></button>
+      <button type="button" class="btn btn-branco" id="btnNovo">+ <span data-t="newTicket"></span></button>
+    </div>
+  </div>
+  <div class="contadores" id="contadores"></div>
+  <div class="lista-tickets" id="listaTickets"><div class="vazio carregando">…</div></div>
+</main>
+
+<div class="gaveta-fundo" id="gavetaFundo"></div>
+<form class="gaveta" id="gaveta" novalidate aria-labelledby="gavetaTit" role="dialog" aria-modal="true">
+  <div class="gaveta-topo"><span class="silk" id="gavetaTit" data-t="newTicket"></span><button type="button" id="btnFecharGaveta">ESC</button></div>
+  <span style="font-size:13px;line-height:1.5;color:var(--t55)"><span data-t="sentTo"></span> <span class="azul" id="emailSuporte"></span></span>
+  <div class="duas-col">
+    <label class="campo"><span data-t="game"></span><select class="input" id="tJogo"></select></label>
+    <label class="campo"><span data-t="platform"></span><select class="input" id="tPlataforma"></select></label>
+  </div>
+  <div class="campo"><span data-t="category"></span><div class="chips" id="tCategoria"></div></div>
+  <div class="campo"><span data-t="priority"></span><div class="segmentado" id="tPrioridade"></div></div>
+  <label class="campo"><span data-t="subject"></span><input class="input" id="tAssunto" maxlength="140" data-t-ph="subjectPh"></label>
+  <label class="campo"><span data-t="describe"></span><textarea class="input" id="tDescricao" rows="5" maxlength="5000" data-t-ph="describePh"></textarea></label>
+  <label class="upload"><i>↑</i><span><span id="tArquivoNome" data-t="attach"></span><small>PNG, JPG, WEBP · 10 MB</small></span>
+    <input type="file" id="tArquivo" accept="image/png,image/jpeg,image/webp,image/gif"></label>
+  <span class="erro-msg" id="erroTicket" role="alert" hidden></span>
+  <button type="submit" class="btn btn-azul" id="btnEnviar" data-t="send"></button>
+</form>
+
+<footer id="rodape"></footer>
+</body>
+</html>

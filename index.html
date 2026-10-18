@@ -1,188 +1,120 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flying Apollo Studios</title>
-  <meta name="description" content="Flying Apollo Studios - estúdio independente de jogos mobile. Independent mobile game studio.">
-  <script>
-    // Mesmo seletor de idioma da página de privacidade
-    (function () {
-      var lang;
-      try {
-        var p = new URLSearchParams(window.location.search).get('lang');
-        if (p === 'pt' || p === 'en') lang = p;
-        if (!lang) lang = localStorage.getItem('fas-lang');
-      } catch (e) {}
-      if (lang !== 'pt' && lang !== 'en') {
-        lang = (navigator.language || 'en').toLowerCase().indexOf('pt') === 0 ? 'pt' : 'en';
-      }
-      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
-    })();
-  </script>
-  <style>
-    :root {
-      --bg: #10163a;
-      --bg-2: #070a1c;
-      --text: #ffffff;
-      --muted: #b8bdd6;
-      --accent: #ff7a2f;
-      --card: rgba(255,255,255,.06);
-      --border: rgba(255,255,255,.14);
-    }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      color: var(--text);
-      background: radial-gradient(ellipse at top, var(--bg) 0%, var(--bg-2) 70%);
-      background-color: var(--bg-2);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      line-height: 1.6;
-      display: flex;
-      flex-direction: column;
-    }
-
-    html[lang="en"] [data-lang="pt"],
-    html:not([lang="en"]) [data-lang="en"] { display: none !important; }
-
-    header {
-      max-width: 960px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 20px;
-      display: flex;
-      justify-content: flex-end;
-    }
-    .lang-switch {
-      display: inline-flex;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      overflow: hidden;
-    }
-    .lang-switch a {
-      color: var(--text);
-      text-decoration: none;
-      padding: 4px 14px;
-      font-size: .85rem;
-      font-weight: 600;
-    }
-    html:not([lang="en"]) .lang-switch a[data-set="pt"],
-    html[lang="en"] .lang-switch a[data-set="en"] {
-      background: var(--accent);
-      color: #10163a;
-    }
-
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 20px 20px 60px;
-    }
-    .logo {
-      font-size: clamp(2.2rem, 8vw, 4.2rem);
-      font-weight: 900;
-      letter-spacing: 1px;
-      line-height: 1.05;
-      margin: 0;
-    }
-    .logo span { color: var(--accent); }
-    .tagline {
-      color: var(--muted);
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
-      margin: 16px 0 36px;
-      max-width: 520px;
-    }
-    .links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-    }
-    .btn {
-      display: inline-block;
-      padding: 12px 22px;
-      border-radius: 999px;
-      text-decoration: none;
-      font-weight: 700;
-      border: 1px solid var(--border);
-      color: var(--text);
-      background: var(--card);
-    }
-    .btn.primary {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #10163a;
-    }
-    .btn:hover { filter: brightness(1.1); }
-    .contact {
-      margin-top: 36px;
-      color: var(--muted);
-      font-size: .95rem;
-    }
-    .contact a { color: var(--text); }
-
-    footer {
-      text-align: center;
-      color: var(--muted);
-      font-size: .85rem;
-      padding: 20px;
-    }
-    footer a { color: var(--muted); }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://i.ytimg.com; connect-src 'self' https://haz.tail5f7589.ts.net; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Flying Apollo Studios</title>
+<meta name="description" content="Flying Apollo Studios: estúdio independente de jogos para celular e PC. Independent mobile and PC game studio.">
+<meta property="og:title" content="Flying Apollo Studios">
+<meta property="og:description" content="Estúdio independente de jogos para celular e PC.">
+<meta property="og:image" content="https://www.fastudios.com.br/assets/img/logo-apollo.png">
+<meta name="theme-color" content="#04050A">
+<link rel="icon" href="/assets/img/games/rare-minerals-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script src="/assets/js/config.js" defer></script>
+<script src="/assets/js/conteudo.js" defer></script>
+<script src="/assets/js/comum.js" defer></script>
+<script src="/assets/js/home.js" defer></script>
 </head>
 <body>
-
-<header>
-  <div class="lang-switch" role="group" aria-label="Idioma / Language">
-    <a href="?lang=pt" data-set="pt" hreflang="pt-BR">PT</a>
-    <a href="?lang=en" data-set="en" hreflang="en">EN</a>
+<section class="hero" id="hero" aria-label="Flying Apollo Studios">
+  <div id="heroCamadas"></div>
+  <canvas class="hero-estrelas" id="estrelas" aria-hidden="true"></canvas>
+  <div class="hero-sombra"></div>
+  <div class="hero-brilho" id="brilho"></div>
+  <header class="topo" id="topo"></header>
+  <div class="hero-conteudo">
+    <div class="hero-info">
+      <div class="kicker hero-kicker"><span id="heroNum"></span><span class="traco"></span><span id="heroGenero"></span></div>
+      <h1 class="hero-titulo" id="heroTitulo" aria-live="polite"></h1>
+      <p class="hero-tagline" id="heroTagline"></p>
+      <div class="hero-acoes">
+        <button type="button" class="btn btn-branco" id="heroVer"><span data-t="seeGame"></span> <span class="mono">→</span></button>
+        <span class="pill-preco"><span class="ponto"></span><span id="heroPreco"></span></span>
+        <span class="mono hero-plats" id="heroPlats"></span>
+      </div>
+    </div>
+    <div class="fila" id="jogos">
+      <div class="fila-topo"><span data-t="ourGames"></span><span id="dica"></span></div>
+      <div class="fila-tiles" id="tiles" role="listbox" aria-label="Jogos"></div>
+    </div>
   </div>
-</header>
+</section>
 
 <main>
-  <h1 class="logo">FLYING <span>APOLLO</span><br>STUDIOS</h1>
+  <section class="secao" id="bastidores" hidden>
+    <div class="secao-cab" data-reveal>
+      <div><span class="kicker">01 · <span data-t="bKicker"></span></span><h2 class="h2" data-t="bTitle"></h2></div>
+      <p data-t="bText"></p>
+    </div>
+    <div class="grade-2">
+      <div data-reveal id="devlog">
+        <div class="capa capa-vazia" id="devlogCapa"></div>
+        <div class="devlog-rodape">
+          <span><span class="rotulo" id="devlogRotulo"></span><b id="devlogTitulo"></b></span>
+          <button type="button" class="btn-assistir" id="devlogPlay"><span class="tri"></span><span data-t="watch"></span></button>
+        </div>
+      </div>
+      <div class="wip" data-reveal id="wip"></div>
+    </div>
+  </section>
 
-  <p class="tagline" data-lang="pt">Estúdio independente de jogos para celular.</p>
-  <p class="tagline" data-lang="en">Independent mobile game studio.</p>
+  <section class="secao" id="trailers" hidden>
+    <div data-reveal style="display:flex;flex-direction:column;gap:16px">
+      <span class="kicker"><span id="trNum">02</span> · <span data-t="trKicker"></span></span>
+      <h2 class="h2" data-t="trTitle"></h2>
+    </div>
+    <div class="trailers" id="trailerLista"></div>
+  </section>
 
-  <div class="links">
-    <a class="btn primary" href="privacy.html" data-lang="pt">Política de Privacidade</a>
-    <a class="btn" href="privacy.html#pt-termos" data-lang="pt">Termos de Uso</a>
-    <a class="btn primary" href="privacy.html" data-lang="en">Privacy Policy</a>
-    <a class="btn" href="privacy.html#en-terms" data-lang="en">Terms of Use</a>
-  </div>
+  <section class="secao" id="sobre">
+    <div class="sobre" data-reveal>
+      <div class="sobre-arte"><div class="glow"></div><div class="recorte"><img src="/assets/img/logo-apollo.png" alt="Apollo, o pomerânia mascote do estúdio"></div></div>
+      <div class="sobre-texto">
+        <span class="kicker"><span id="abNum">03</span> · <span data-t="abKicker"></span></span>
+        <h2 class="h2" data-t="abTitle"></h2>
+        <p data-t="abText"></p>
+        <div class="fatos" id="fatos"></div>
+      </div>
+    </div>
+  </section>
 
-  <p class="contact">
-    <span data-lang="pt">Contato e suporte:</span>
-    <span data-lang="en">Contact &amp; support:</span>
-    <a href="mailto:flyingapollostudios@gmail.com">flyingapollostudios@gmail.com</a>
-  </p>
+  <section class="secao secao-ultima" id="newsletter">
+    <div class="news" data-reveal>
+      <div>
+        <span class="kicker"><span id="nlNum">04</span> · Newsletter</span>
+        <h2 class="h2" data-t="nlTitle"></h2>
+        <p data-t="nlText"></p>
+      </div>
+      <form id="nlForm" novalidate>
+        <div class="news-campo">
+          <label class="so-leitor" for="nlEmail">E-mail</label>
+          <input type="email" id="nlEmail" autocomplete="email" maxlength="254" placeholder="voce@email.com" required>
+          <button type="submit" class="btn btn-branco" id="nlBtn" data-t="nlBtn"></button>
+        </div>
+        <span class="news-nota" id="nlNota" data-t="nlNote" role="status"></span>
+      </form>
+    </div>
+  </section>
 </main>
 
-<footer>
-  &copy; <span id="year">2026</span> Flying Apollo Studios &middot;
-  <a href="privacy.html" data-lang="pt">Privacidade</a>
-  <a href="privacy.html" data-lang="en">Privacy</a>
-</footer>
+<footer id="rodape"></footer>
 
-<script>
-  document.querySelectorAll('.lang-switch a').forEach(function (link) {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      var lang = link.getAttribute('data-set');
-      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
-      try {
-        localStorage.setItem('fas-lang', lang);
-        history.replaceState(null, '', '?lang=' + lang);
-      } catch (err) {}
-    });
-  });
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+<div class="overlay video-overlay" id="videoModal" role="dialog" aria-modal="true" aria-labelledby="videoTitulo">
+  <div class="video-caixa">
+    <div><span id="videoTitulo" style="font-size:16px;font-weight:500"></span><button type="button" class="btn-esc" data-fechar-video>ESC · <span data-t="close"></span></button></div>
+    <div class="video-tela" id="videoTela"></div>
+  </div>
+</div>
 
+<div class="overlay" id="detalheModal" role="dialog" aria-modal="true" aria-labelledby="detNome">
+  <div class="detalhe" id="detalhe"></div>
+</div>
+<noscript><p style="padding:20px;text-align:center">Flying Apollo Studios · <a href="/privacidade/">Privacidade</a> · <a href="/termos/">Termos</a> · flyingapollostudios@gmail.com</p></noscript>
 </body>
 </html>
