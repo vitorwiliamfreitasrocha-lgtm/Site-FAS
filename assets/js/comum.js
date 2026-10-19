@@ -73,7 +73,7 @@
   });
 
   // ---------- topo e menu ----------
-  var LOGO = '<span class="marca-icone"><img src="/assets/img/logo-apollo.png" alt="" width="118" height="66"></span>';
+  var LOGO = '<span class="marca-icone"><img src="/assets/img/logo-apollo-t.png" alt="" width="118" height="66" decoding="async"></span>';
   FAS.marca = function (sub) {
     return '<a class="marca" href="/" aria-label="Flying Apollo Studios">' + LOGO +
       '<span class="marca-texto">Flying Apollo<br><span>' + FAS.esc(sub || 'Studios') + '</span></span></a>';
