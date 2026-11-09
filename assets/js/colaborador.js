@@ -35,7 +35,13 @@
       pendingN: 'pendentes', lastUpd: 'última atualização', noEntries: 'Nenhum registro ainda.', savedN: 'registro(s) salvo(s)',
       changedLbl: 'alterou', noChange: 'Nada mudou.', changesSaved: 'alteração(ões) salva(s) e registrada(s) no histórico', previewOf: 'Prévia', willSave: 'serão salvos em',
       errEntries: 'Não entendi a lista. Use uma linha por item começando com "-".',
-      errBadDate: 'Data inválida (não pode ser futura).', errBadLink: 'Link inválido: use um endereço que comece com https://', errSave: 'Não foi possível salvar.', nextAt: 'próxima', refreshNow: '↻ Atualizar agora',
+      errBadDate: 'Data inválida (não pode ser futura).', errBadLink: 'Link inválido: use um endereço que comece com https://', errSave: 'Não foi possível salvar.',
+      rdBtn: 'Projeto reditus', rdGoal: 'Meta', rdOf: 'de', rdMissing: 'Faltam', rdDone: 'Meta atingida!', rdMonths: 'Depósitos por mês',
+      rdAdd: 'Adicionar depósito', rdDate: 'Data', rdValue: 'Valor (R$)', rdDesc: 'Descrição (opcional)', rdFile: 'Comprovante (PDF ou imagem, até 10 MB)',
+      rdSave: 'Salvar depósito', rdOpen: 'Abrir', rdDownload: 'Baixar', rdAttach: '+ Anexar', rdRemove: 'Remover',
+      rdConfirm: 'Remover este depósito das contas? O valor sai do total.', rdEmpty: 'Nenhum depósito ainda.', rdViewOnly: 'Somente visualização: apenas o responsável lança valores.',
+      rdErrValue: 'Digite um valor válido, como 1.500,00.', rdErrFile: 'O comprovante precisa ser PDF, PNG, JPG ou WEBP, com até 10 MB.', rdErrDate: 'Data inválida (não pode ser futura).',
+      rdErrPerm: 'Só o responsável pode alterar o Projeto reditus.', rdErrLink: 'Não foi possível abrir o arquivo.', rdSaved: 'Depósito salvo', rdRemoved: 'Depósito removido', rdAttached: 'Comprovante anexado', nextAt: 'próxima', refreshNow: '↻ Atualizar agora',
       admobLive: 'AdMob · atualizado', empty: 'Nada cadastrado ainda.', emptyHint: 'Edite C:\\FastudiosAPI\\dados\\painel.json no HAZ.',
       noData: 'Sem dados', loading: 'Carregando…', noAccess: 'Seu acesso não inclui finanças.' },
     en: { tituloPagina: 'Team Area · Flying Apollo Studios', back: 'Back to site', collabArea: 'Team Area', login: 'Login', password: 'Password',
@@ -65,7 +71,13 @@
       pendingN: 'pending', lastUpd: 'last update', noEntries: 'No entries yet.', savedN: 'entry(ies) saved',
       changedLbl: 'changed', noChange: 'Nothing changed.', changesSaved: 'change(s) saved and logged in the history', previewOf: 'Preview', willSave: 'will be saved on',
       errEntries: 'Could not read the list. Use one line per item starting with "-".',
-      errBadDate: 'Invalid date (cannot be in the future).', errBadLink: 'Invalid link: use an address starting with https://', errSave: 'Could not save.', nextAt: 'next', refreshNow: '↻ Refresh now',
+      errBadDate: 'Invalid date (cannot be in the future).', errBadLink: 'Invalid link: use an address starting with https://', errSave: 'Could not save.',
+      rdBtn: 'Projeto reditus', rdGoal: 'Goal', rdOf: 'of', rdMissing: 'Remaining', rdDone: 'Goal reached!', rdMonths: 'Deposits by month',
+      rdAdd: 'Add deposit', rdDate: 'Date', rdValue: 'Amount (R$)', rdDesc: 'Description (optional)', rdFile: 'Receipt (PDF or image, up to 10 MB)',
+      rdSave: 'Save deposit', rdOpen: 'Open', rdDownload: 'Download', rdAttach: '+ Attach', rdRemove: 'Remove',
+      rdConfirm: 'Remove this deposit from the totals? The amount leaves the total.', rdEmpty: 'No deposits yet.', rdViewOnly: 'View only: only the owner can add amounts.',
+      rdErrValue: 'Enter a valid amount, such as 1,500.00 or 1500.', rdErrFile: 'The receipt must be a PDF, PNG, JPG or WEBP up to 10 MB.', rdErrDate: 'Invalid date (cannot be in the future).',
+      rdErrPerm: 'Only the owner can change Projeto reditus.', rdErrLink: 'Could not open the file.', rdSaved: 'Deposit saved', rdRemoved: 'Deposit removed', rdAttached: 'Receipt attached', nextAt: 'next', refreshNow: '↻ Refresh now',
       admobLive: 'AdMob · updated', empty: 'Nothing here yet.', emptyHint: 'Edit C:\\FastudiosAPI\\dados\\painel.json on HAZ.',
       noData: 'No data', loading: 'Loading…', noAccess: 'Your access does not include finance.' }
   });
@@ -200,7 +212,7 @@
           return '<div class="linha-aviso"><b>' + esc(n.titulo) + '</b><small>' + esc(n.autor) + ' · ' + esc(dataCurta(n.data)) + '</small></div>';
         }).join('') : vazio()) + '</div>';
       seloAdmob(d.financas ? a : null);
-      return '<div class="kpis">' + kpis.join('') + '</div><div class="grade-cards">' + receita + projetos + '</div><div class="grade-cards">' + marcos + avisos + '</div>';
+      return '<div class="kpis">' + kpis.join('') + '</div>' + blocoReditus() + '<div class="grade-cards">' + receita + projetos + '</div><div class="grade-cards">' + marcos + avisos + '</div>';
     },
 
     projects: function (d) {
@@ -397,6 +409,7 @@
     var desenhar = function (d) {
       if (meu !== pedido) return;
       el.innerHTML = RENDER[sub ? 'jogo' : p](d);
+      if (p === 'overview' && reditusAberto) carregarReditus();
       requestAnimationFrame(function () { el.classList.add('on'); });
     };
     if (cache[p] && !forcar) { desenhar(cache[p]); return; }
@@ -462,7 +475,241 @@
   document.addEventListener('submit', function (e) {
     if (e.target.id === 'formRegistro') { e.preventDefault(); enviarRegistros(false); }
     if (e.target.id === 'formDados') { e.preventDefault(); enviarDados(); }
+    if (e.target.id === 'formReditus') { e.preventDefault(); salvarDeposito(e.target); }
   });
+  document.addEventListener('change', function (e) {
+    if (e.target.matches && e.target.matches('[data-rd-anexar]')) anexarComprovante(e.target);
+  });
+
+  // ---------- Projeto Reditus ----------
+  // O servidor decide quem pode lancar (pode_editar); aqui so se escondem os controles.
+  var reditusAberto = false, pedidoReditus = 0, ANEXO_MAX = 10 * 1024 * 1024;
+  var PIXELS_MOEDAS = ['......KKKK......', '....KKYYYYKK....', '...KYWWYYYYOK...', '...KYWYOOYYOK...', '...KYYYOYYYOK...', '...KYYYOOYYOK...',
+    '...KYYYYOYYOK...', '....KKOOOOKK....', '......KKKK......', '..KKKKKKKKKKKK..', '.KYWWYYYYYYYOOK.', '.KOOOOOOOOOOOOK.', '.KKKKKKKKKKKKKK.',
+    '.KYWWYYYYYYYOOK.', '.KOOOOOOOOOOOOK.', '..KKKKKKKKKKKK..'];
+  var COR_PIXEL = { K: '#7A4A00', Y: '#FFD27A', O: '#F0A030', W: '#FFF4CC' };
+  function iconeMoedas() {
+    var r = '';
+    PIXELS_MOEDAS.forEach(function (linha, y) {
+      linha.split('').forEach(function (c, x) { if (COR_PIXEL[c]) r += '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="' + COR_PIXEL[c] + '"/>'; });
+    });
+    return '<svg class="rd-moedas" viewBox="0 0 16 16" width="40" height="40" shape-rendering="crispEdges" aria-hidden="true">' + r + '</svg>';
+  }
+  function blocoReditus() {
+    return '<section class="reditus"><button type="button" class="rd-btn" data-reditus-toggle aria-expanded="' + reditusAberto + '" aria-controls="reditusPainel">' +
+      iconeMoedas() + '<span class="silk">' + esc(FAS.t('rdBtn')) + '</span><i class="rd-seta" aria-hidden="true"></i></button>' +
+      '<div id="reditusPainel"' + (reditusAberto ? '' : ' hidden') + '></div></section>';
+  }
+  function reais(c) { return new Intl.NumberFormat(loc(), { style: 'currency', currency: 'BRL' }).format((+c || 0) / 100); }
+  function dataNum(s) { var p = String(s).split('-'); return new Date(+p[0], +p[1] - 1, +p[2]).toLocaleDateString(loc(), { day: '2-digit', month: '2-digit', year: 'numeric' }); }
+  function mesLongo(ym) {
+    var p = String(ym).split('-'), t = new Date(+p[0], +p[1] - 1, 1).toLocaleDateString(loc(), { month: 'long', year: 'numeric' });
+    return t.charAt(0).toUpperCase() + t.slice(1);
+  }
+  function centavosDe(txt) {
+    var s = String(txt || '').replace(/[R$\s]/gi, '');
+    if (s.indexOf(',') >= 0) s = s.replace(/\./g, '').replace(',', '.');
+    else if (/^\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, '');
+    if (!/^\d+(\.\d{1,2})?$/.test(s)) return null;
+    var p = s.split('.'), c = parseInt(p[0], 10) * 100 + parseInt(((p[1] || '') + '00').slice(0, 2), 10);
+    return c > 0 ? c : null;
+  }
+  function barraReditus(d) {
+    var deps = d.depositos, n = deps.length, GAP = 26, H = Math.max(480, n * GAP + 60), meta = d.meta_centavos, escala = Math.max(meta, d.total_centavos);
+    var alto = function (c) { return Math.round(c / escala * H); };
+    var alvo = deps.map(function (x) { return alto(x.acumulado_centavos); }), rot = alvo.slice(), i;
+    for (i = 1; i < n; i++) if (rot[i] < rot[i - 1] + GAP) rot[i] = rot[i - 1] + GAP;
+    if (n && rot[n - 1] > H - 10) rot[n - 1] = H - 10;
+    for (i = n - 2; i >= 0; i--) if (rot[i] > rot[i + 1] - GAP) rot[i] = rot[i + 1] - GAP;
+    var riscos = alvo.map(function (y) { return '<i class="rd-risco" style="bottom:' + y + 'px"></i>'; }).join('');
+    var ligas = alvo.map(function (y, k) { return '<polyline points="0,' + (H - y) + ' 12,' + (H - y) + ' 30,' + (H - rot[k]) + ' 42,' + (H - rot[k]) + '"/>'; }).join('');
+    var rotulos = deps.map(function (x, k) {
+      return '<div class="rd-rot" style="bottom:' + (rot[k] - 10) + 'px"><b>' + esc(dataNum(x.data)) + '</b><span>+' + esc(reais(x.valor_centavos)) + '</span></div>';
+    }).join('');
+    var linhaMeta = d.total_centavos > meta ? '<i class="rd-risco rd-risco-meta" style="bottom:' + alto(meta) + 'px"></i>' : '';
+    return '<div class="rd-termo" style="height:' + H + 'px"><div class="rd-tubo"><div class="rd-fill' + (d.atingida ? ' rd-cheio' : '') + '" data-rd-altura="' +
+      alto(d.total_centavos) + '"></div>' + riscos + linhaMeta + '</div><svg class="rd-ligas" width="42" height="' + H + '" aria-hidden="true">' + ligas + '</svg><div class="rd-rots">' + rotulos + '</div></div>';
+  }
+  function anexoHtml(a) {
+    return '<span class="rd-anexo"><span title="' + esc(a.nome) + '">' + esc(a.nome) + '</span><button type="button" class="ver-tudo" data-rd-abrir="' + a.id + '">' + esc(FAS.t('rdOpen')) +
+      '</button><button type="button" class="ver-tudo" data-rd-baixar="' + a.id + '">' + esc(FAS.t('rdDownload')) + '</button></span>';
+  }
+  function mesesReditus(d) {
+    var T = FAS.t;
+    if (!d.meses.length) return '<div class="c-vazio">' + esc(T('rdEmpty')) + '</div>';
+    var maior = Math.max.apply(null, d.meses.map(function (m) { return m.total_centavos; }));
+    return d.meses.map(function (m) {
+      var linhas = d.depositos.filter(function (x) { return x.data.slice(0, 7) === m.mes; }).reverse().map(function (x) {
+        return '<div class="rd-dep"><div class="rd-dep-topo"><span class="mono">' + esc(dataNum(x.data)) + '</span><b>' + esc(reais(x.valor_centavos)) + '</b>' +
+          (d.pode_editar ? '<label class="ver-tudo rd-anexar">' + esc(T('rdAttach')) + '<input type="file" class="so-leitor" accept="application/pdf,image/png,image/jpeg,image/webp" data-rd-anexar="' + x.id + '"></label>' +
+            '<button type="button" class="ver-tudo rd-remover" data-rd-remover="' + x.id + '">' + esc(T('rdRemove')) + '</button>' : '') + '</div>' +
+          (x.descricao ? '<small>' + esc(x.descricao) + '</small>' : '') + x.anexos.map(anexoHtml).join('') + '</div>';
+      }).join('');
+      return '<div class="rd-mes"><div class="rd-mes-cab"><span>' + esc(mesLongo(m.mes)) + '</span><b>' + esc(reais(m.total_centavos)) + '</b></div>' +
+        '<div class="rd-mes-barra"><i style="width:' + Math.round(m.total_centavos / maior * 100) + '%"></i></div>' + linhas + '</div>';
+    }).join('');
+  }
+  function formReditus() {
+    var T = FAS.t;
+    return '<form class="rd-form" id="formReditus" novalidate><span class="tit">' + esc(T('rdAdd')) + '</span><div class="rd-form-grade">' +
+      '<label class="campo">' + esc(T('rdDate')) + '<input class="input" type="date" name="data" value="' + hojeISO() + '" max="' + hojeISO() + '"></label>' +
+      '<label class="campo">' + esc(T('rdValue')) + '<input class="input" name="valor" inputmode="decimal" autocomplete="off" maxlength="20"></label></div>' +
+      '<label class="campo">' + esc(T('rdDesc')) + '<input class="input" name="descricao" maxlength="200" autocomplete="off"></label>' +
+      '<label class="campo">' + esc(T('rdFile')) + '<input class="input" type="file" name="anexo" accept="application/pdf,image/png,image/jpeg,image/webp"></label>' +
+      '<span class="erro-msg" id="erroReditus" role="alert" hidden></span><div class="acoes-form"><button type="submit" class="btn btn-branco">' + esc(T('rdSave')) + '</button></div></form>';
+  }
+  function painelReditus(d) {
+    var T = FAS.t;
+    return '<div class="rd-painel' + (d.atingida ? ' rd-meta' : '') + '">' + (d.atingida ? '<canvas class="rd-fogos" aria-hidden="true"></canvas>' : '') + '<div class="rd-grade"><div class="rd-col-barra">' +
+      (d.atingida ? '<div class="rd-parabens silk">' + esc(T('rdDone')) + '</div>' : '') +
+      '<span class="rotulo">' + esc(T('rdGoal')) + ' ' + esc(reais(d.meta_centavos)) + '</span><div class="rd-total">' + esc(reais(d.total_centavos)) + '</div>' +
+      '<small>' + String(d.percentual).replace('.', FAS.lang === 'pt' ? ',' : '.') + '%' + (d.falta_centavos ? ' · ' + esc(T('rdMissing')) + ' ' + esc(reais(d.falta_centavos)) : '') + '</small>' +
+      barraReditus(d) + '</div><div class="rd-col-info">' + (d.pode_editar ? formReditus() : '<small class="rd-so-ver">' + esc(T('rdViewOnly')) + '</small>') +
+      '<span class="tit">' + esc(T('rdMonths')) + '</span>' + mesesReditus(d) + '</div></div></div>';
+  }
+  function carregarReditus() {
+    var meu = ++pedidoReditus, alvo = $('reditusPainel');
+    if (!alvo) return;
+    if (!alvo.firstChild) alvo.innerHTML = '<div class="carregando">' + esc(FAS.t('loading')) + '</div>';
+    FAS.api('/collab/reditus', { token: token }).then(function (r) {
+      var el = $('reditusPainel');
+      if (meu !== pedidoReditus || !el || !reditusAberto) return;
+      if (r.status === 401) return sair(FAS.t('sessionEnd'));
+      if (r.status !== 200) { el.innerHTML = '<div class="c-vazio">' + esc(FAS.t('errRede')) + '</div>'; return; }
+      el.innerHTML = painelReditus(r.dados);
+      var fill = el.querySelector('[data-rd-altura]');
+      if (fill) requestAnimationFrame(function () { requestAnimationFrame(function () { fill.style.height = fill.getAttribute('data-rd-altura') + 'px'; }); });
+      var tela = el.querySelector('.rd-fogos');
+      if (tela) iniciarFogos(tela);
+    });
+  }
+  // Fogos em pixels em volta do painel, sem parar enquanto a meta estiver atingida.
+  function iniciarFogos(tela) {
+    var ctx = tela.getContext('2d');
+    if (!ctx) return;
+    var W = 0, H = 0, foguetes = [], fagulhas = [], quadro = 0;
+    var CORES = ['#FFD27A', '#F0A030', '#FFFFFF', '#8FB0FF', '#3D7BFF', '#FF8A8A', '#7CE3A0'];
+    function medir() {
+      if (tela.clientWidth !== W || tela.clientHeight !== H) { W = tela.width = tela.clientWidth; H = tela.height = tela.clientHeight; }
+    }
+    function lancar() {
+      var v = Math.sqrt(2 * 0.09 * H * (0.45 + Math.random() * 0.45));
+      // a maioria sobe em volta da barra; alguns se espalham pelo resto do painel
+      var tubo = tela.parentNode.querySelector('.rd-tubo'), base = tela.getBoundingClientRect(), r = tubo ? tubo.getBoundingClientRect() : null;
+      var centro = r ? r.left - base.left + r.width / 2 : W / 4;
+      var x = Math.random() < 0.75 ? centro + (Math.random() < 0.5 ? -1 : 1) * (r ? r.width / 2 : 40) * (1 + Math.random() * 3.5) : W * (0.04 + Math.random() * 0.92);
+      foguetes.push({ x: Math.max(8, Math.min(W - 8, x)), y: H, vy: -v, cor: CORES[Math.floor(Math.random() * CORES.length)] });
+    }
+    function explodir(f) {
+      var n = 34 + Math.floor(Math.random() * 18);
+      for (var i = 0; i < n; i++) {
+        var a = i / n * 6.283, v = 1.4 + Math.random() * 2.8;
+        fagulhas.push({ x: f.x, y: f.y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, vida: 1, cor: Math.random() < 0.75 ? f.cor : '#FFFFFF' });
+      }
+    }
+    function passo() {
+      medir();
+      if (quadro++ % 26 === 0) { lancar(); if (Math.random() < 0.5) lancar(); }
+      foguetes = foguetes.filter(function (f) { f.y += f.vy; f.vy += 0.09; if (f.vy >= -0.4) { explodir(f); return false; } return true; });
+      fagulhas = fagulhas.filter(function (p) { p.x += p.vx; p.y += p.vy; p.vy += 0.04; p.vx *= 0.985; p.vida -= 0.014; return p.vida > 0; });
+    }
+    function pintar() {
+      ctx.clearRect(0, 0, W, H);
+      foguetes.forEach(function (f) { ctx.globalAlpha = 1; ctx.fillStyle = f.cor; ctx.fillRect(Math.round(f.x / 3) * 3, Math.round(f.y / 3) * 3, 3, 6); });
+      fagulhas.forEach(function (p) { ctx.globalAlpha = Math.max(0, p.vida); ctx.fillStyle = p.cor; ctx.fillRect(Math.round(p.x / 4) * 4, Math.round(p.y / 4) * 4, 4, 4); });
+      ctx.globalAlpha = 1;
+    }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { for (var q = 0; q < 150; q++) passo(); pintar(); return; }
+    (function laco() {
+      if (!tela.isConnected) return;
+      requestAnimationFrame(laco);
+      if (document.hidden) return;
+      passo();
+      pintar();
+    })();
+  }
+  function erroReditus(r) {
+    var e = r.dados && r.dados.erro;
+    if (r.status === 0) return FAS.t('errRede');
+    if (r.status === 429) return FAS.t('errMuitas');
+    if (r.status === 403) return FAS.t('rdErrPerm');
+    return FAS.t({ valor_invalido: 'rdErrValue', data_invalida: 'rdErrDate', anexo_invalido: 'rdErrFile' }[e] || 'errSave');
+  }
+  function arquivoOk(a) { return !a || (a.size <= ANEXO_MAX && /^(application\/pdf|image\/(png|jpeg|webp))$/.test(a.type)); }
+  function salvarDeposito(f) {
+    var valor = centavosDe(f.valor.value), arq = f.anexo.files[0];
+    msgEm('erroReditus');
+    if (!valor) return msgEm('erroReditus', FAS.t('rdErrValue'));
+    if (!arquivoOk(arq)) return msgEm('erroReditus', FAS.t('rdErrFile'));
+    var fd = new FormData();
+    fd.append('data', f.data.value);
+    fd.append('valor_centavos', String(valor));
+    fd.append('descricao', f.descricao.value);
+    if (arq) fd.append('anexo', arq, arq.name);
+    var botao = f.querySelector('button[type=submit]');
+    botao.disabled = true;
+    FAS.api('/collab/reditus/depositos', { method: 'POST', form: fd, token: token, timeout: 120000 }).then(function (r) {
+      botao.disabled = false;
+      if (r.status === 401) return sair(FAS.t('sessionEnd'));
+      if (r.status !== 201) return msgEm('erroReditus', erroReditus(r));
+      FAS.toast(FAS.t('rdSaved'));
+      carregarReditus();
+    });
+  }
+  function anexarComprovante(input) {
+    var arq = input.files[0], id = input.getAttribute('data-rd-anexar');
+    if (!arq) return;
+    if (!arquivoOk(arq)) { input.value = ''; return FAS.toast(FAS.t('rdErrFile')); }
+    var fd = new FormData();
+    fd.append('anexo', arq, arq.name);
+    FAS.api('/collab/reditus/depositos/' + encodeURIComponent(id) + '/anexos', { method: 'POST', form: fd, token: token, timeout: 120000 }).then(function (r) {
+      if (r.status === 401) return sair(FAS.t('sessionEnd'));
+      if (r.status !== 201) return FAS.toast(erroReditus(r));
+      FAS.toast(FAS.t('rdAttached'));
+      carregarReditus();
+    });
+  }
+  function abrirAnexo(id, baixar) {
+    // Abre a aba ainda dentro do clique (senao o navegador bloqueia como pop-up) e so depois pede o link.
+    var aba = baixar ? null : window.open('about:blank', '_blank');
+    if (aba) aba.opener = null;
+    FAS.api('/collab/reditus/anexos/' + encodeURIComponent(id) + '/link' + (baixar ? '?baixar=1' : ''), { token: token }).then(function (r) {
+      if (r.status === 401) { if (aba) aba.close(); return sair(FAS.t('sessionEnd')); }
+      if (r.status !== 200 || !r.dados.url) { if (aba) aba.close(); return FAS.toast(FAS.t('rdErrLink')); }
+      var url = window.FAS_CONFIG.api + r.dados.url;
+      if (aba) { aba.location.replace(url); return; }
+      var a = document.createElement('a');
+      a.href = url; a.rel = 'noopener'; a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+  }
+  function cliqueReditus(e) {
+    var b;
+    if ((b = e.target.closest('[data-reditus-toggle]'))) {
+      reditusAberto = !reditusAberto;
+      b.setAttribute('aria-expanded', String(reditusAberto));
+      var alvo = $('reditusPainel');
+      alvo.hidden = !reditusAberto;
+      if (reditusAberto) carregarReditus(); else { pedidoReditus++; alvo.innerHTML = ''; }
+      return true;
+    }
+    if ((b = e.target.closest('[data-rd-abrir]'))) { abrirAnexo(b.getAttribute('data-rd-abrir'), false); return true; }
+    if ((b = e.target.closest('[data-rd-baixar]'))) { abrirAnexo(b.getAttribute('data-rd-baixar'), true); return true; }
+    if ((b = e.target.closest('[data-rd-remover]'))) {
+      if (window.confirm(FAS.t('rdConfirm'))) {
+        FAS.api('/collab/reditus/depositos/' + encodeURIComponent(b.getAttribute('data-rd-remover')) + '/remover', { method: 'POST', body: {}, token: token }).then(function (r) {
+          if (r.status === 401) return sair(FAS.t('sessionEnd'));
+          if (r.status !== 200) return FAS.toast(erroReditus(r));
+          FAS.toast(FAS.t('rdRemoved'));
+          carregarReditus();
+        });
+      }
+      return true;
+    }
+    return false;
+  }
 
   // ---------- sessao ----------
   function erro(t) { var e = $('erroLogin'); e.textContent = t || ''; e.hidden = !t; }
@@ -476,7 +723,7 @@
   }
   function sair(motivo) {
     if (token) FAS.api('/collab/logout', { method: 'POST', body: {}, token: token });
-    token = null; eu = null; cache = {};
+    token = null; eu = null; cache = {}; reditusAberto = false;
     FAS.sessao.apagar('colab');
     $('pagina').innerHTML = '';
     $('telaApp').hidden = true;
@@ -532,6 +779,7 @@
       if (e.target.closest('[data-editar-dados]')) { var fd = $('formDados'); if (fd) { fd.hidden = !fd.hidden; if (!fd.hidden) fd.querySelector('input').focus(); } return; }
       if (e.target.closest('[data-cancelar-dados]')) { $('formDados').hidden = true; return; }
       if (e.target.closest('[data-previa]')) { enviarRegistros(true); return; }
+      if (cliqueReditus(e)) return;
       if (e.target.closest('[data-sair]')) sair();
     });
     FAS.aoTrocarIdioma(function () {

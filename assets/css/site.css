@@ -597,3 +597,60 @@ html[data-doc="terms"] [data-doc-show="privacy"], html[data-doc="privacy"] [data
 .reg-sem { color: var(--t45); border-color: transparent; }
 .reg-alt { font-size: 12px; color: var(--t55); padding-left: 54px; }
 .reg-alt b { font-weight: 500; color: var(--t72); }
+
+/* ---------- colaborador: Projeto Reditus ---------- */
+.reditus { display: flex; flex-direction: column; gap: 14px; }
+.rd-btn { display: flex; align-items: center; gap: 16px; width: 100%; padding: 14px 20px; border: 1px solid rgba(255,210,122,.3); border-radius: 16px; background: linear-gradient(90deg, rgba(255,210,122,.1), var(--card) 55%); color: #fff; cursor: pointer; text-align: left; transition: border-color .2s, box-shadow .25s; }
+.rd-btn:hover { border-color: var(--alerta); box-shadow: 0 10px 40px rgba(255,210,122,.14); }
+.rd-btn .silk { font-size: 18px; flex: 1; }
+.rd-moedas { flex: none; image-rendering: pixelated; }
+.rd-seta { width: 9px; height: 9px; border-right: 2px solid var(--alerta); border-bottom: 2px solid var(--alerta); transform: rotate(45deg); transition: transform .25s; margin-right: 4px; }
+.rd-btn[aria-expanded="true"] .rd-seta { transform: rotate(-135deg); }
+.rd-painel { position: relative; border: 1px solid var(--borda); border-radius: 18px; padding: 24px; background: var(--card); overflow: hidden; }
+.rd-painel.rd-meta { border-color: var(--alerta); box-shadow: 0 0 60px rgba(255,210,122,.16); }
+.rd-fogos { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 3; image-rendering: pixelated; }
+.rd-grade { display: grid; grid-template-columns: minmax(300px, 400px) minmax(0, 1fr); gap: 32px; align-items: start; }
+.rd-col-barra, .rd-col-info { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.rd-col-info { gap: 16px; }
+.rd-col-info > .tit, .rd-form > .tit { font-size: 15px; font-weight: 500; }
+.rd-parabens { font-size: 22px; color: var(--alerta); margin-bottom: 6px; }
+.rd-total { font-family: var(--silk); font-size: clamp(26px, 3vw, 36px); line-height: 1.1; }
+.rd-col-barra > small { font-size: 13px; color: var(--t55); }
+.rd-termo { position: relative; display: flex; margin-top: 18px; }
+.rd-tubo { position: relative; width: 72px; flex: none; height: 100%; background: repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0, rgba(255,255,255,.05) 2px, transparent 2px, transparent 24px), #06070D; border: 3px solid rgba(255,255,255,.22); border-radius: 4px; box-sizing: content-box; }
+.rd-fill { position: absolute; left: 0; right: 0; bottom: 0; height: 0; background: repeating-linear-gradient(0deg, #3D7BFF 0, #3D7BFF 10px, #5B90FF 10px, #5B90FF 20px); transition: height 1.3s var(--ease); }
+.rd-fill.rd-cheio { background: repeating-linear-gradient(0deg, #F0A030 0, #F0A030 10px, #FFD27A 10px, #FFD27A 20px); box-shadow: 0 0 30px rgba(255,210,122,.55); }
+.rd-risco { position: absolute; left: 0; right: 0; height: 2px; background: #fff; margin-bottom: -1px; }
+.rd-risco-meta { background: var(--alerta); height: 3px; }
+.rd-ligas { flex: none; overflow: visible; }
+.rd-ligas polyline { fill: none; stroke: rgba(255,255,255,.28); stroke-width: 1; }
+.rd-rots { position: relative; flex: 1; min-width: 0; }
+.rd-rot { position: absolute; left: 4px; display: flex; gap: 8px; align-items: baseline; height: 20px; line-height: 20px; white-space: nowrap; font-size: 12px; }
+.rd-rot b { font-family: var(--mono); font-weight: 400; color: #fff; }
+.rd-rot span { color: var(--azul-claro); }
+.rd-form { display: flex; flex-direction: column; gap: 12px; padding-bottom: 18px; border-bottom: 1px solid var(--borda); }
+.rd-form-grade { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.rd-form input[type=file].input { padding: 10px; font-size: 13px; }
+.rd-so-ver { font-size: 12px; color: var(--t45); }
+.rd-mes { display: flex; flex-direction: column; gap: 8px; }
+.rd-mes-cab { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; }
+.rd-mes-cab b { font-weight: 500; color: var(--alerta); font-family: var(--mono); font-size: 13px; }
+.rd-mes-barra { height: 4px; background: rgba(255,255,255,.07); }
+.rd-mes-barra i { display: block; height: 100%; background: var(--alerta); }
+.rd-dep { display: flex; flex-direction: column; gap: 4px; padding: 8px 0 8px 12px; border-left: 2px solid rgba(255,255,255,.1); }
+.rd-dep-topo { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 14px; }
+.rd-dep-topo .mono { font-size: 12px; color: var(--t55); }
+.rd-dep-topo b { font-weight: 500; flex: 1; }
+.rd-dep small { font-size: 13px; color: var(--t62); overflow-wrap: anywhere; }
+.rd-anexo { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--t72); }
+.rd-anexo > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; flex: 0 1 auto; }
+.rd-anexo .ver-tudo { flex: none; padding: 0; font-size: 12px; }
+.rd-anexar { padding: 0; font-size: 12px; position: relative; }
+.rd-remover { padding: 0; font-size: 12px; color: var(--erro); }
+@media (max-width: 760px) {
+  .rd-painel { padding: 18px; }
+  .rd-grade { grid-template-columns: minmax(0, 1fr); }
+  .rd-tubo { width: 52px; }
+  .rd-rot { font-size: 11px; gap: 6px; }
+  .rd-form-grade { grid-template-columns: minmax(0, 1fr); }
+}
